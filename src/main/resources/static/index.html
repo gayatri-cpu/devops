@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaxGuard - Vaccination Reminder Portal | DevOps Pipeline</title>
+  <meta name="description" content="Automated Vaccination Reminder Portal with Selenium Testing Pipeline, Docker, and Ansible CI/CD.">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Chart.js for summary analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top Application Header -->
+    <header class="app-header glass-card">
+      <div class="brand-section">
+        <div class="brand-icon">💉</div>
+        <div>
+          <h1 class="brand-title">VaxGuard</h1>
+          <p class="brand-subtitle">Smart Vaccination Reminder & Immunization Portal</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Student Information Tag -->
+        <div class="student-tag" id="student-badge">
+          <span>🎓</span>
+          <span>Gayatri Patil (23102A0016 | Roll 15)</span>
+        </div>
+
+        <!-- Health Status Badge -->
+        <div class="health-badge" id="system-health-badge">
+          <span class="pulse-dot"></span>
+          <span id="health-status-text">System UP (v1.0.0)</span>
+        </div>
+
+        <!-- Role Selector Switcher -->
+        <div class="role-badge-container">
+          <button type="button" class="role-btn active" id="role-healthworker-btn">👨‍⚕️ Health Worker</button>
+          <button type="button" class="role-btn" id="role-parent-btn">👨‍👩‍👧 Parent View</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs glass-card">
+      <button class="nav-tab-btn active" id="btn-nav-dashboard">
+        <span>📊</span> Dashboard & Analytics
+      </button>
+      <button class="nav-tab-btn" id="btn-nav-schedule">
+        <span>💉</span> Vaccination Records
+      </button>
+      <button class="nav-tab-btn" id="btn-nav-beneficiaries">
+        <span>👶</span> Child Beneficiaries
+      </button>
+      <button class="nav-tab-btn" id="btn-nav-reminders">
+        <span>🔔</span> Reminder Simulator
+      </button>
+      <button class="nav-tab-btn" id="btn-nav-devops">
+        <span>🚀</span> DevOps Pipeline & Quality Gate
+      </button>
+    </nav>
+
+    <!-- Action Banner -->
+    <section class="action-banner glass-card">
+      <div class="action-banner-text">
+        <h2>National Immunization Schedule Management</h2>
+        <p>Real-time tracking, proactive SMS alerts, and role-based administration workflow.</p>
+      </div>
+      <div class="action-banner-btns">
+        <button class="btn btn-secondary" id="btn-batch-reminders">
+          <span>🔔</span> Dispatch Due Reminders
+        </button>
+        <button class="btn btn-primary" id="btn-open-register-modal">
+          <span>➕</span> Register Beneficiary
+        </button>
+      </div>
+    </section>
+
+    <!-- KPI Stat Cards -->
+    <section class="stats-grid">
+      <!-- Total Beneficiaries -->
+      <div class="stat-card glass-card" style="--card-accent: #0ea5e9;">
+        <div class="stat-header">
+          <span class="stat-label">Registered Children</span>
+          <div class="stat-icon">👶</div>
+        </div>
+        <div class="stat-value" id="stat-total-beneficiaries">0</div>
+        <div class="stat-desc">Active beneficiary profiles</div>
+      </div>
+
+      <!-- Completed Vaccinations -->
+      <div class="stat-card glass-card" style="--card-accent: #10b981;">
+        <div class="stat-header">
+          <span class="stat-label">Doses Administered</span>
+          <div class="stat-icon">✅</div>
+        </div>
+        <div class="stat-value" id="stat-completed-vaccines">0</div>
+        <div class="stat-desc">Successfully completed</div>
+      </div>
+
+      <!-- Upcoming Vaccinations (Next 7 Days) -->
+      <div class="stat-card glass-card" style="--card-accent: #f59e0b;">
+        <div class="stat-header">
+          <span class="stat-label">Upcoming (7 Days)</span>
+          <div class="stat-icon">📅</div>
+        </div>
+        <div class="stat-value" id="stat-upcoming-vaccines">0</div>
+        <div class="stat-desc">Scheduled within week</div>
+      </div>
+
+      <!-- Overdue Vaccinations -->
+      <div class="stat-card glass-card" style="--card-accent: #f43f5e;">
+        <div class="stat-header">
+          <span class="stat-label">Overdue Vaccinations</span>
+          <div class="stat-icon">⚠️</div>
+        </div>
+        <div class="stat-value" id="stat-overdue-vaccines">0</div>
+        <div class="stat-desc">Requires immediate reminder</div>
+      </div>
+
+      <!-- Overall Compliance Rate -->
+      <div class="stat-card glass-card" style="--card-accent: #6366f1;">
+        <div class="stat-header">
+          <span class="stat-label">Compliance Rate</span>
+          <div class="stat-icon">📈</div>
+        </div>
+        <div class="stat-value"><span id="stat-compliance-rate">0</span>%</div>
+        <div class="stat-desc">Immunization coverage</div>
+      </div>
+    </section>
+
+    <!-- TAB 1: DASHBOARD & ANALYTICS -->
+    <main id="tab-dashboard" class="tab-content active">
+      <div class="dashboard-grid">
+        <!-- Chart Section -->
+        <div class="glass-card" style="padding: 24px;">
+          <div class="card-title">
+            <span>Immunization Distribution Breakdown</span>
+            <span style="font-size: 12px; color: var(--text-dim);">Live Database Metrics</span>
+          </div>
+          <div style="height: 280px; position: relative;">
+            <canvas id="vaccineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Quick Summary & Instructions -->
+        <div class="glass-card" style="padding: 24px;">
+          <div class="card-title">
+            <span>Quick Immunization Guide</span>
+          </div>
+          <div style="font-size: 13px; color: var(--text-muted); line-height: 1.8;">
+            <p><strong>• Birth:</strong> BCG, Hepatitis B-0, OPV-0</p>
+            <p><strong>• 6 Weeks:</strong> OPV-1, Pentavalent-1, Rotavirus-1, PCV-1</p>
+            <p><strong>• 10 Weeks:</strong> OPV-2, Pentavalent-2, Rotavirus-2</p>
+            <p><strong>• 14 Weeks:</strong> OPV-3, Pentavalent-3, Rotavirus-3, PCV-2</p>
+            <p><strong>• 9 Months:</strong> Measles/MR-1, PCV Booster</p>
+            <p><strong>• 16-24 Months:</strong> DPT Booster-1, MR-2</p>
+          </div>
+          <div style="margin-top: 20px; padding: 12px; background: rgba(14, 165, 233, 0.1); border-radius: 8px; border: 1px solid rgba(14, 165, 233, 0.2);">
+            <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">Selenium CI Quality Gate Notice</div>
+            <div style="font-size: 11px; color: var(--text-muted);">This portal is automatically tested by Selenium WebDriver on every Git commit in Jenkins.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 2: VACCINATION RECORDS & SEARCH -->
+    <section id="tab-schedule" class="tab-content" style="display: none;">
+      <!-- Search & Status Filter Bar -->
+      <div class="filter-bar glass-card">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search by child name, parent phone, or vaccine name...">
+        </div>
+        <div>
+          <select id="status-filter" class="filter-select">
+            <option value="ALL">All Statuses</option>
+            <option value="SCHEDULED">Scheduled</option>
+            <option value="COMPLETED">Completed / Administered</option>
+            <option value="OVERDUE">Overdue</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-refresh-records">
+          <span>🔄</span> Refresh
+        </button>
+      </div>
+
+      <!-- Vaccination Records Table -->
+      <div class="glass-card" style="padding: 16px;">
+        <div class="table-responsive">
+          <table class="data-table" id="records-table">
+            <thead>
+              <tr>
+                <th>Record ID</th>
+                <th>Child Name</th>
+                <th>Parent Contact</th>
+                <th>Vaccine Name</th>
+                <th>Dose #</th>
+                <th>Scheduled Date</th>
+                <th>Status</th>
+                <th>Administered Details</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="records-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: BENEFICIARIES REGISTRY -->
+    <section id="tab-beneficiaries" class="tab-content" style="display: none;">
+      <div class="glass-card" style="padding: 24px;">
+        <div class="card-title">
+          <span>Registered Child Beneficiaries</span>
+          <button class="btn btn-primary btn-sm" id="btn-add-beneficiary-secondary">
+            <span>➕</span> Add Child
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" id="beneficiaries-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Child Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Parent Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="beneficiaries-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: REMINDER SIMULATOR -->
+    <section id="tab-reminders" class="tab-content" style="display: none;">
+      <div class="dashboard-grid">
+        <div class="glass-card" style="padding: 24px;">
+          <div class="card-title">
+            <span>Proactive Reminder Dispatch Simulator</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+            Simulate automated SMS and Email alerts sent to parents for upcoming doses (due in next 7 days) and overdue doses.
+          </p>
+          <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+            <button class="btn btn-primary" id="btn-trigger-batch-sms">
+              <span>📲</span> Dispatch Batch SMS to Due Parents
+            </button>
+            <button class="btn btn-secondary" id="btn-clear-reminder-logs">
+              <span>🧹</span> Clear Logs
+            </button>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.7); border-radius: 8px; padding: 16px; border: 1px solid var(--border-glass);">
+            <div style="font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">Simulated SMS Message Template:</div>
+            <code style="font-family: var(--font-mono); font-size: 12px; color: #cbd5e1; display: block; line-height: 1.6;">
+              "Dear [Parent], reminder that [Child]'s [VaccineName] Dose #[Dose] is scheduled on [Date]. Please visit your nearest PHC center. - VaxGuard National Health"
+            </code>
+          </div>
+        </div>
+
+        <div class="glass-card" style="padding: 24px;">
+          <div class="card-title">
+            <span>Recent Notification Log</span>
+          </div>
+          <div id="reminder-log-list" style="max-height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-size: 12px; color: var(--text-dim); text-align: center; padding: 20px;">
+              No reminders dispatched yet in this session. Click "Dispatch Batch SMS" to trigger alerts.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: DEVOPS PIPELINE & QUALITY GATE -->
+    <section id="tab-devops" class="tab-content" style="display: none;">
+      <div class="glass-card" style="padding: 24px; margin-bottom: 24px;">
+        <div class="card-title">
+          <span>DevOps End-to-End Automation Pipeline</span>
+          <span class="badge badge-completed">Jenkins CI/CD Active</span>
+        </div>
+
+        <div class="pipeline-flow">
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">1. Git SCM</div>
+            <div class="pipeline-node-status">feature/* -> develop</div>
+          </div>
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">2. Maven Build</div>
+            <div class="pipeline-node-status">Clean Compile</div>
+          </div>
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">3. Selenium Gate</div>
+            <div class="pipeline-node-status">5 User Journeys</div>
+          </div>
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">4. Docker Build</div>
+            <div class="pipeline-node-status">vaxguard:v1.0.0</div>
+          </div>
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">5. Ansible Deploy</div>
+            <div class="pipeline-node-status">Idempotent Run</div>
+          </div>
+          <div class="pipeline-arrow">➔</div>
+
+          <div class="pipeline-node success">
+            <div class="pipeline-node-name">6. Health Gate</div>
+            <div class="pipeline-node-status">/api/health 200 OK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 10: Defect Simulation Quality Gate Demonstration Panel -->
+      <div class="glass-card" style="padding: 24px; border-color: rgba(244, 63, 94, 0.3);">
+        <div class="card-title" style="color: #fb7185;">
+          <span>Task 10: Intentional Defect Injection & Quality Gate Demonstration</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+          This toggle enables a simulated backend validation error on child registration. When enabled, running the Selenium test suite simulates a pipeline quality gate failure, capturing a failure screenshot and aborting deployment. When unchecked, the bug is resolved and the pipeline passes!
+        </p>
+
+        <div style="display: flex; align-items: center; gap: 14px; background: rgba(15, 23, 42, 0.8); padding: 14px 20px; border-radius: 8px; border: 1px solid var(--border-glass);">
+          <input type="checkbox" id="defect-toggle-checkbox" style="width: 18px; height: 18px; cursor: pointer;">
+          <div>
+            <label for="defect-toggle-checkbox" style="font-size: 13px; font-weight: 700; cursor: pointer;">
+              Enable Simulated Defect (Throws 400 Bad Request on Beneficiary Registration)
+            </label>
+            <div id="defect-status-text" style="font-size: 12px; color: #10b981;">
+              Status: System Normal (Defect Disabled - All Quality Gates Pass)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL: REGISTER BENEFICIARY -->
+  <div class="modal-overlay" id="modal-register">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">👶 Register Child Beneficiary</h3>
+        <button type="button" class="modal-close-btn" id="modal-register-close">&times;</button>
+      </div>
+
+      <form id="form-register-beneficiary">
+        <div class="form-group">
+          <label class="form-label" for="childName">Child's Full Name *</label>
+          <input type="text" id="childName" class="form-input" placeholder="e.g. Aarav Sharma" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="dateOfBirth">Date of Birth *</label>
+            <input type="date" id="dateOfBirth" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gender">Gender *</label>
+            <select id="gender" class="form-select" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="parentName">Parent / Guardian Name *</label>
+            <input type="text" id="parentName" class="form-input" placeholder="e.g. Pooja Sharma" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contactPhone">Contact Phone Number *</label>
+            <input type="tel" id="contactPhone" class="form-input" placeholder="e.g. +91 98201 12345" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="contactEmail">Contact Email</label>
+          <input type="email" id="contactEmail" class="form-input" placeholder="e.g. parent@example.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="address">Residential Address</label>
+          <textarea id="address" class="form-textarea" rows="2" placeholder="Street, City, Postal Code"></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-register">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit-registration">
+            <span>💾</span> Save & Generate Schedule
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADMINISTER / UPDATE VACCINE STATUS -->
+  <div class="modal-overlay" id="modal-administer">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">💉 Administer / Update Vaccine Record</h3>
+        <button type="button" class="modal-close-btn" id="modal-admin-close">&times;</button>
+      </div>
+
+      <form id="form-administer-vaccine">
+        <input type="hidden" id="admin-record-id">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Child Name</label>
+            <input type="text" id="admin-child-name" class="form-input" readonly>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Vaccine</label>
+            <input type="text" id="admin-vaccine-name" class="form-input" readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="admin-status-select">Status *</label>
+          <select id="admin-status-select" class="form-select">
+            <option value="COMPLETED">COMPLETED (Administered)</option>
+            <option value="SCHEDULED">SCHEDULED (Upcoming)</option>
+            <option value="OVERDUE">OVERDUE (Missed)</option>
+            <option value="CANCELLED">CANCELLED / CONTRAINDICATED</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="admin-nurse-name">Administering Nurse / Doctor</label>
+            <input type="text" id="admin-nurse-name" class="form-input" placeholder="e.g. Nurse Sarah">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="admin-batch-number">Vaccine Batch / Lot #</label>
+            <input type="text" id="admin-batch-number" class="form-input" placeholder="e.g. LOT-SERUM-2026-A1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="admin-notes">Clinical Notes / Adverse Reactions</label>
+          <textarea id="admin-notes" class="form-textarea" rows="2" placeholder="e.g. Dose administered at right thigh. No adverse effects observed."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-administer">Cancel</button>
+          <button type="submit" class="btn btn-accent" id="btn-save-administer">
+            <span>✅</span> Confirm Administration
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Logic -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

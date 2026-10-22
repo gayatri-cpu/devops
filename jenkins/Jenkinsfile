@@ -1,0 +1,143 @@
+// ==============================================================================
+// Jenkinsfile: End-to-End Declarative CI/CD Pipeline
+// Project: Selenium Testing Pipeline for Vaccination Reminder Portal (VaxGuard)
+// Student: Gayatri Patil (PRN: 23102A0016, Roll: 15)
+// ==============================================================================
+
+pipeline {
+    agent any
+
+    parameters {
+        choice(name: 'ENVIRONMENT', choices: ['staging', 'production'], description: 'Deployment Target Environment')
+        string(name: 'APP_PORT', defaultValue: '8080', description: 'Application Port Mapping')
+        booleanParam(name: 'RUN_SELENIUM_TESTS', defaultValue: true, description: 'Execute Selenium Automated UI Quality Gate')
+        string(name: 'DOCKER_IMAGE_TAG', defaultValue: '1.0.0', description: 'Docker Release Tag')
+    }
+
+    environment {
+        APP_NAME = 'vaccination-reminder-portal'
+        DOCKER_IMAGE = "vaxguard/vaccination-portal:${params.DOCKER_IMAGE_TAG}"
+        CONTAINER_NAME = "vaxguard-${params.ENVIRONMENT}"
+        MAVEN_OPTS = "-Dfile.encoding=UTF-8"
+    }
+
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        ansiColor('xterm')
+    }
+
+    triggers {
+        // Triggered every 15 minutes by polling or webhook
+        pollSCM('H/15 * * * *')
+    }
+
+    stages {
+        stage('1. Checkout SCM') {
+            steps {
+                echo "=== Stage 1: Checking out source code from Git ==="
+                checkout scm
+                script {
+                    echo "Git Commit: ${env.GIT_COMMIT ?: 'Local-Workspace'}"
+                    echo "Git Branch: ${env.GIT_BRANCH ?: 'main'}"
+                }
+            }
+        }
+
+        stage('2. Environment & Tool Verification') {
+            steps {
+                echo "=== Stage 2: Validating Java, Maven, and Docker environments ==="
+                sh 'java -version || true'
+                sh 'mvn -version || ./mvnw -version || true'
+                sh 'docker --version || true'
+            }
+        }
+
+        stage('3. Compile & Static Analysis') {
+            steps {
+                echo "=== Stage 3: Compiling Java 21 Spring Boot Source ==="
+                sh './mvnw clean compile'
+            }
+        }
+
+        stage('4. Selenium Automated Testing Quality Gate') {
+            when {
+                expression { return params.RUN_SELENIUM_TESTS }
+            }
+            steps {
+                echo "=== Stage 4: Executing Selenium WebDriver Journeys in Headless Mode ==="
+                // If Selenium test fails, surefire-report records it and stops deployment
+                sh './mvnw test -Dselenium.headless=true'
+            }
+            post {
+                always {
+                    echo "Archiving JUnit Test Results..."
+                    junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
+                    
+                    echo "Archiving Selenium Failure Screenshots (if any)..."
+                    archiveArtifacts artifacts: 'target/screenshots/*.png', allowEmptyArchive: true
+                }
+                failure {
+                    echo "[QUALITY GATE FAILED] Selenium test assertion failed. Halting deployment pipeline to protect environment."
+                }
+            }
+        }
+
+        stage('5. Package Application Artifact') {
+            steps {
+                echo "=== Stage 5: Packaging Executable Spring Boot JAR ==="
+                sh './mvnw package -DskipTests'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+
+        stage('6. Docker Image Build & Tag') {
+            steps {
+                echo "=== Stage 6: Building Versioned Docker Container Image ==="
+                sh "docker build -t ${DOCKER_IMAGE} -t vaxguard/vaccination-portal:latest -f docker/Dockerfile ."
+                sh "docker images | grep vaxguard || true"
+            }
+        }
+
+        stage('7. Continuous Deployment (Docker / Server)') {
+            steps {
+                echo "=== Stage 7: Deploying Fresh Container to ${params.ENVIRONMENT.toUpperCase()} ==="
+                script {
+                    // Stop and remove existing container if running
+                    sh """
+                        docker stop ${CONTAINER_NAME} || true
+                        docker rm ${CONTAINER_NAME} || true
+                        docker run -d --name ${CONTAINER_NAME} \
+                            -p ${params.APP_PORT}:8080 \
+                            -e SPRING_PROFILES_ACTIVE=${params.ENVIRONMENT} \
+                            ${DOCKER_IMAGE}
+                    """
+                }
+            }
+        }
+
+        stage('8. Automated Health Check Verification') {
+            steps {
+                echo "=== Stage 8: Verifying Application Health Readiness ==="
+                sleep 8
+                sh """
+                    echo "Probing health check endpoint..."
+                    curl -f http://localhost:${params.APP_PORT}/api/health || exit 1
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "================================================================="
+            echo "🎉 Pipeline Completed Successfully! Application live on port ${params.APP_PORT}"
+            echo "================================================================="
+        }
+        failure {
+            echo "================================================================="
+            echo "❌ Pipeline Failed! Deployment aborted to maintain cluster stability."
+            echo "================================================================="
+        }
+    }
+}
