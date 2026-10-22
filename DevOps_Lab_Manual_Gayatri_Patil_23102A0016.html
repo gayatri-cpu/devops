@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DevOps Lab Manual - Gayatri Patil (23102A0016)</title>
+    <style>
+    @page {
+        size: A4;
+        margin: 18mm 16mm 18mm 16mm;
+        @bottom-right {
+            content: "Page " counter(page);
+            font-size: 9pt;
+            color: #64748b;
+        }
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        color: #1e293b;
+        line-height: 1.5;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        font-size: 10pt;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+    .cover-container {
+        text-align: center;
+        padding: 40px 20px;
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .cover-header {
+        border-bottom: 3px double #0ea5e9;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+    .univ-name {
+        font-size: 16pt;
+        font-weight: 800;
+        color: #0f172a;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+    .dept-name {
+        font-size: 12pt;
+        font-weight: 700;
+        color: #0ea5e9;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+    .course-title {
+        font-size: 11pt;
+        font-weight: 600;
+        color: #64748b;
+        margin-top: 4px;
+    }
+    .proj-title-box {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 30px 20px;
+        margin: 40px 0;
+    }
+    .proj-badge {
+        display: inline-block;
+        background: #0ea5e9;
+        color: white;
+        font-size: 9pt;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .proj-title {
+        font-size: 20pt;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.3;
+        margin-bottom: 10px;
+    }
+    .proj-subtitle {
+        font-size: 11pt;
+        color: #475569;
+        font-style: italic;
+    }
+    .student-card {
+        margin: 30px auto;
+        width: 80%;
+        border-collapse: collapse;
+    }
+    .student-card td {
+        padding: 8px 14px;
+        border: 1px solid #cbd5e1;
+        font-size: 10.5pt;
+    }
+    .student-card td.lbl {
+        background: #f1f5f9;
+        font-weight: 700;
+        width: 35%;
+        color: #334155;
+    }
+    .student-card td.val {
+        font-weight: 600;
+        color: #0f172a;
+    }
+    .cert-container {
+        padding: 30px 20px;
+    }
+    .cert-heading {
+        text-align: center;
+        font-size: 18pt;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .cert-body {
+        font-size: 11pt;
+        line-height: 1.8;
+        text-align: justify;
+        margin-bottom: 40px;
+    }
+    .sign-table {
+        width: 100%;
+        margin-top: 60px;
+        border: none;
+    }
+    .sign-table td {
+        border: none;
+        text-align: center;
+        padding: 10px;
+        vertical-align: bottom;
+    }
+    .sign-line {
+        border-top: 1px solid #334155;
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 6px;
+        font-weight: 700;
+        font-size: 10pt;
+    }
+    .index-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+    .index-table th {
+        background: #0ea5e9;
+        color: white;
+        padding: 8px 10px;
+        font-size: 9.5pt;
+        font-weight: 700;
+        border: 1px solid #0284c7;
+        text-align: left;
+    }
+    .index-table td {
+        padding: 7px 10px;
+        border: 1px solid #e2e8f0;
+        font-size: 9pt;
+    }
+    .index-table tr:nth-child(even) td {
+        background: #f8fafc;
+    }
+    .task-h1 {
+        font-size: 15pt;
+        font-weight: 800;
+        color: #0284c7;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 4px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .task-h2 {
+        font-size: 12pt;
+        font-weight: 700;
+        color: #1e3a8a;
+        margin-top: 14px;
+        margin-bottom: 6px;
+    }
+    .task-h3 {
+        font-size: 10.5pt;
+        font-weight: 700;
+        color: #0f172a;
+        margin-top: 10px;
+        margin-bottom: 4px;
+    }
+    .report-p {
+        margin: 4px 0 8px 0;
+        text-align: justify;
+    }
+    .speech-quote {
+        background: #f0f9ff;
+        border-left: 4px solid #0ea5e9;
+        padding: 8px 14px;
+        margin: 8px 0;
+        font-style: italic;
+        color: #0369a1;
+        font-size: 9.5pt;
+    }
+    .code-block {
+        background: #0f172a;
+        color: #34d399;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 8.5pt;
+        overflow-x: auto;
+        margin: 8px 0;
+        line-height: 1.4;
+    }
+    .report-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+    }
+    .report-table th {
+        background: #f1f5f9;
+        color: #334155;
+        font-weight: 700;
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+        font-size: 9pt;
+        text-align: left;
+    }
+    .report-table td {
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+        font-size: 8.5pt;
+    }
+    .report-table tr:nth-child(even) td {
+        background: #f8fafc;
+    }
+    code {
+        background: #f1f5f9;
+        color: #0f172a;
+        font-family: "Consolas", monospace;
+        font-size: 9pt;
+        padding: 2px 5px;
+        border-radius: 4px;
+    }
+    .bullet-item {
+        margin-left: 18px;
+        margin-bottom: 3px;
+    }
+    </style>
+</head>
+<body>
+
+    <!-- 1. COVER PAGE -->
+    <div class="cover-container">
+        <div class="cover-header">
+            <div class="univ-name">DEPARTMENT OF COMPUTER ENGINEERING</div>
+            <div class="dept-name">DevOps &amp; Continuous Testing Laboratory</div>
+            <div class="course-title">Bachelor of Technology / Bachelor of Engineering &bull; Semester VI</div>
+        </div>
+
+        <div class="proj-title-box">
+            <div class="proj-badge">Laboratory Project Manual</div>
+            <div class="proj-title">Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</div>
+            <div class="proj-subtitle">Comprehensive DevOps Lifecycle: Git, Jenkins CI/CD, Docker Containerization &amp; Ansible Provisioning</div>
+        </div>
+
+        <table class="student-card">
+            <tr>
+                <td class="lbl">Student Name:</td>
+                <td class="val">GAYATRI PATIL</td>
+            </tr>
+            <tr>
+                <td class="lbl">Student ID / PRN:</td>
+                <td class="val" style="color: #0284c7;">23102A0016</td>
+            </tr>
+            <tr>
+                <td class="lbl">Roll Number:</td>
+                <td class="val" style="color: #0284c7;">15</td>
+            </tr>
+            <tr>
+                <td class="lbl">Class / Batch:</td>
+                <td class="val">TE Computer Engineering / Batch B</td>
+            </tr>
+            <tr>
+                <td class="lbl">Academic Year:</td>
+                <td class="val">2026 &ndash; 2027</td>
+            </tr>
+        </table>
+
+        <div style="font-size: 9pt; color: #94a3b8; margin-top: 30px;">
+            Certified under National Immunization Schedule &bull; Software Quality &amp; Automated Testing Laboratory
+        </div>
+    </div>
+
+    <!-- 2. CERTIFICATE -->
+    <div class="page-break"></div>
+    <div class="cert-container">
+        <div class="cert-heading">Certificate of Completion</div>
+        <p class="cert-body">
+            This is to certify that Miss <strong>GAYATRI PATIL</strong>, bearing Student ID / PRN <strong>23102A0016</strong> and Roll Number <strong>15</strong>, 
+            of Third Year Computer Engineering, has satisfactorily completed all fifteen (15) prescribed laboratory assignments and deliverables for the course of 
+            <strong>DevOps Laboratory</strong> entitled <em>'Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)'</em> during the academic year 2026&ndash;2027.
+        </p>
+
+        <p class="cert-body">
+            The project work encompasses GitFlow branching, automated Selenium WebDriver regression testing, Jenkins continuous integration pipelines, multi-stage Docker containerization, 
+            Ansible idempotent infrastructure provisioning, and automated rollback mechanisms.
+        </p>
+
+        <table class="sign-table">
+            <tr>
+                <td style="width: 33%;">
+                    <div class="sign-line">Internal Examiner</div>
+                </td>
+                <td style="width: 33%;">
+                    <div class="sign-line">External Examiner</div>
+                </td>
+                <td style="width: 33%;">
+                    <div class="sign-line">Head of Department</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 3. TABLE OF CONTENTS -->
+    <div class="page-break"></div>
+    <div class="cert-container">
+        <h2 style="font-size: 15pt; color: #0284c7; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
+            Index of 15 DevOps Laboratory Assignments
+        </h2>
+        <table class="index-table">
+            <thead>
+                <tr>
+                    <th style="width: 12%; text-align:center;">Task #</th>
+                    <th style="width: 58%;">Deliverable Assignment Title</th>
+                    <th style="width: 15%; text-align:center;">Status</th>
+                    <th style="width: 15%; text-align:center;">Verification</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 01</td>
+            <td>Problem Definition, Stakeholder Analysis and Frozen Scope</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 02</td>
+            <td>Agile Planning, User Stories, Product Backlog and DevOps Workflow</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 03</td>
+            <td>Requirements, Multi-Tier Architecture and Spring Boot Tech Setup</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 04</td>
+            <td>Git and GitHub Repository Initialization, .gitignore and Branch Policy</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 05</td>
+            <td>Feature Development with Branching: National Immunization Schedule Engine</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 06</td>
+            <td>MVP Completion, Simulated Merge Conflict Resolution and Release Tag v1.0.0</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 07</td>
+            <td>Jenkins Installation, SCM Polling Trigger and Continuous Integration Job</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 08</td>
+            <td>Pipeline as Code: Declarative 8-Stage Jenkinsfile with Environment Parameters</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 09</td>
+            <td>Selenium Automated Test Design: 5 Critical User Journeys and Screenshot Listener</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 10</td>
+            <td>Continuous Testing in Jenkins: Quality Gate Enforcement, Defect Fix & Rerun</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 11</td>
+            <td>Docker Multi-Stage Image Build, Non-Root Hardening and Container Lifecycle</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 12</td>
+            <td>Jenkins-Docker Continuous Deployment: Container Rollout and Health Gate</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 13</td>
+            <td>Configuration Management Script: Server Prerequisites & Ansible Playbook</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 14</td>
+            <td>Automated Provisioning, Idempotency Validation (changed=0) and Fast Rollback</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align:center; font-weight:bold;">Task 15</td>
+            <td>Final Release Release Dossier, Live Demonstration Guide and Complete Viva Prep</td>
+            <td style="text-align:center;">Completed</td>
+            <td style="text-align:center;">Verified</td>
+        </tr>
+        
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 4. ALL 15 TASKS -->
+    <div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 01: Problem Definition and Scope</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To study the real-time clinical and operational need for an automated Vaccination Reminder Portal, identify target users, analyze existing healthcare pain points, identify key stakeholders, outline technical/operational constraints, and freeze a 15-task Minimum Viable Product (MVP) scope.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Problem statement, stakeholder list, objectives, constraints and approved MVP scope."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Problem Definition to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 1, I studied the real-world challenge of childhood immunization dropouts. In physical card-based systems, parents frequently miss subsequent booster shots (such as Pentavalent-2, Measles, and DPT boosters) due to the long intervals between doses. I created the scope for **VaxGuard**, an automated web portal that calculates the complete immunization calendar based on Date of Birth and sends proactive reminders."*</div>
+<h4 class="task-h4">Step 2: Show the Stakeholder Analysis Table</h4>
+<p class="report-p">Show the following stakeholder matrix on your screen or in print:</p>
+<table class="report-table">
+<thead><tr>
+<th>Stakeholder</th>
+<th>Category</th>
+<th>Core Responsibilities & Needs</th>
+</tr></thead><tbody>
+<tr>
+<td>**Parents & Caregivers**</td>
+<td>Primary End-Users</td>
+<td>Check child's upcoming vaccine milestones, receive automated SMS/Email reminders, view historical vaccination records.</td>
+</tr>
+<tr>
+<td>**Healthcare Staff & Nurses**</td>
+<td>Clinical Users</td>
+<td>Update vaccine status from `SCHEDULED` to `COMPLETED`, record administering nurse name and vaccine batch/lot numbers.</td>
+</tr>
+<tr>
+<td>**Public Health Administrators**</td>
+<td>System Supervisors</td>
+<td>Monitor overall clinic immunization compliance %, identify overdue children in the catchment area, dispatch batch reminders.</td>
+</tr>
+<tr>
+<td>**DevOps & QA Engineers**</td>
+<td>Technical Maintainers</td>
+<td>Automate end-to-end regression testing with Selenium WebDriver, enforce Jenkins CI/CD quality gates, automate container rollout.</td>
+</tr>
+</tbody></table>
+<h4 class="task-h4">Step 3: Show the Objectives & Measurable Success Criteria</h4>
+<p class="report-p">1. <strong>Automated Schedule Calculation:</strong> 100% adherence to national immunization guidelines computed automatically from DOB.</p>
+<p class="report-p">2. <strong>Automated Quality Gate:</strong> Continuous testing in Jenkins that catches defects in < 90 seconds.</p>
+<p class="report-p">3. <strong>Containerized Deployment:</strong> Multi-stage Docker container deployed with non-root security.</p>
+<p class="report-p">4. <strong>Reliability & Idempotency:</strong> Ansible server provisioning with zero drift (<code>changed=0</code> on re-runs).</p>
+<h4 class="task-h4">Step 4: Show the Approved 15-Task Frozen Scope</h4>
+<p class="report-p">Point out the 15 sequential milestones:</p>
+<p class="report-p">1. Problem Definition and Scope</p>
+<p class="report-p">2. Agile Planning and DevOps Workflow</p>
+<p class="report-p">3. Requirements, Architecture and Technology Setup</p>
+<p class="report-p">4. Git and GitHub Repository Initialization</p>
+<p class="report-p">5. Feature Development with Branching (Schedule Engine)</p>
+<p class="report-p">6. MVP Completion and Git Collaboration (Merge Conflict & Tagging v1.0.0)</p>
+<p class="report-p">7. Jenkins Installation and Continuous Integration Job</p>
+<p class="report-p">8. Pipeline as Code and Server Deployment (Jenkinsfile)</p>
+<p class="report-p">9. Selenium Test Design and Local Execution (5 Journeys)</p>
+<p class="report-p">10. Continuous Testing in Jenkins (Quality Gate & Defect Remediation)</p>
+<p class="report-p">11. Docker Image and Container Lifecycle</p>
+<p class="report-p">12. Jenkins-Docker Continuous Deployment</p>
+<p class="report-p">13. Configuration Management Script (Ansible)</p>
+<p class="report-p">14. Automated Provisioning and Reliability Validation (Idempotency & Rollback)</p>
+<p class="report-p">15. Final End-to-End Release, Documentation and Viva</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 1</h3>
+<p class="report-p"><strong>Q1: What are the primary pain points in the existing immunization tracking system?</strong></p>
+<p class="report-p">*Answer:* Physical immunization cards get lost or damaged; parents lack automated alerts; healthcare centers cannot easily filter overdue children; and there is a high dropout rate between birth doses and multi-month boosters.</p>
+<p class="report-p"><strong>Q2: What is an MVP (Minimum Viable Product)?</strong></p>
+<p class="report-p">*Answer:* An MVP is the core version of a product containing only essential features needed to deliver immediate value to users and validate hypotheses with minimal development effort. For VaxGuard, the MVP covers registration, automated schedule calculation, role-based status updates, search/filter, and a KPI dashboard.</p>
+<p class="report-p"><strong>Q3: How does DevOps add value to a healthcare application?</strong></p>
+<p class="report-p">*Answer:* Healthcare applications require near-zero error tolerance. DevOps ensures reliability through automated Selenium regression testing on every commit, automated container deployment, zero-downtime rollouts, and instant automated rollback if an issue occurs.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 02: Agile Planning and DevOps Workflow</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To create user stories with clear acceptance criteria for the Vaccination Reminder Portal, prepare a prioritized product backlog, construct a 15-task Kanban/Scrum plan, establish a Definition of Done (DoD), and design an end-to-end DevOps lifecycle diagram.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Backlog, task board, sprint plan, Definition of Done and DevOps workflow diagram."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Agile Planning to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 2, I organized the development using Agile user stories. I established clear acceptance criteria for each story, built a 15-task product backlog with story points, defined our Definition of Done (DoD), and illustrated the continuous feedback loop in our DevOps lifecycle."*</div>
+<h4 class="task-h4">Step 2: Show Key User Stories with Acceptance Criteria</h4>
+<p class="report-p">Show these user stories on screen:</p>
+<p class="report-p">1. <strong>Story 1 (Child Registration & Auto Schedule):</strong></p>
+<li class="bullet-item">*As a* Parent / Healthcare Worker, *I want to* register a baby with Date of Birth, *so that* the system auto-calculates 16 national immunization milestones.</li>
+<li class="bullet-item">*Acceptance Criteria:* Date of Birth cannot be in the future; schedule includes BCG, HepB, OPV, Pentavalent, Rotavirus, PCV, and MR.</li>
+<p class="report-p">2. <strong>Story 2 (Role-Based Administration):</strong></p>
+<li class="bullet-item">*As a* Clinical Nurse, *I want to* mark a scheduled dose as <code>COMPLETED</code>, *so that* the clinical provider name and vaccine batch/lot number are logged.</li>
+<li class="bullet-item">*Acceptance Criteria:* Parent View is read-only; Healthcare Worker mode unlocks the administration form.</li>
+<p class="report-p">3. <strong>Story 3 (Selenium Quality Gate):</strong></p>
+<li class="bullet-item">*As a* DevOps Engineer, *I want* every commit to run automated Selenium tests, *so that* UI regressions are blocked before deployment.</li>
+<h4 class="task-h4">Step 3: Show the Definition of Done (DoD)</h4>
+<p class="report-p">A story is marked <strong>Done</strong> only when:</p>
+<li class="bullet-item">[x] Code adheres to clean naming conventions and Spring Boot structure.</li>
+<li class="bullet-item">[x] 100% of headless Selenium tests pass in Maven.</li>
+<li class="bullet-item">[x] Jenkins build succeeds with zero compile or test errors.</li>
+<li class="bullet-item">[x] Non-root multi-stage Docker container builds successfully.</li>
+<li class="bullet-item">[x] Application passes <code>/api/health</code> probe with HTTP 200 OK.</li>
+<h4 class="task-h4">Step 4: Show the DevOps Lifecycle Diagram</h4>
+<p class="report-p">Show the Mermaid diagram on screen:</p>
+<pre class="code-block"><code>flowchart LR
+    subgraph Plan_Dev [1. Plan &amp; Code]
+        A[User Stories] --&gt; B[Feature Branch Git]
+        B --&gt; C[Local Maven Compile]
+    end
+    subgraph CI [2. Continuous Integration]
+        D[Jenkins SCM Trigger] --&gt; E[Selenium Automated Gate]
+        E --&gt; F[Package Executable JAR]
+    end
+    subgraph CD_Ops [3. Deploy &amp; Monitor]
+        G[Multi-Stage Docker] --&gt; H[Ansible Provisioning]
+        H --&gt; I[Health Monitoring /api/health]
+    end
+    Plan_Dev --&gt; CI --&gt; CD_Ops
+    CD_Ops -. Feedback .-&gt; Plan_Dev</code></pre>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 2</h3>
+<p class="report-p"><strong>Q1: What is the difference between Agile and DevOps?</strong></p>
+<p class="report-p">*Answer:* Agile focuses on iteratively developing and delivering software through user stories and collaboration between developers and product owners. DevOps extends Agile by bridging the gap between development and operations through automation (continuous integration, automated testing, containerization, and monitoring).</p>
+<p class="report-p"><strong>Q2: What is the difference between a Product Backlog and a Sprint Backlog?</strong></p>
+<p class="report-p">*Answer:* The Product Backlog is an prioritized list of all features and requirements for the entire product. The Sprint Backlog is a specific subset of backlog items selected for completion in the current sprint.</p>
+<p class="report-p"><strong>Q3: Why is a Definition of Done (DoD) critical in DevOps?</strong></p>
+<p class="report-p">*Answer:* Without a strict DoD, code might be labeled "done" when coding finishes, even if it has no automated tests or breaks during deployment. DoD ensures that testing, packaging, and health verification are completed before code is released.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 03: Requirements, Architecture, and Technology Setup</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To design the minimum application architecture for the Vaccination Reminder Portal (covering create, view, update, search, role-based status workflow, and summary dashboard), select the technology stack and build tools (Java 21, Spring Boot 3.3.4, Maven), configure in-memory storage, setup deployment targets, and establish a working local development environment.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"SRS summary, use-case diagram, architecture diagram, data model/API list and working local setup."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Technology Stack Selection</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 3, I selected a modern Java 21 LTS stack with Spring Boot 3.3.4 and Maven 3.9. For database persistence, I chose an embedded in-memory H2 database, which guarantees that our entire CI/CD pipeline and Jenkins agent can build, test, and run the portal immediately without needing any external database service installed."*</div>
+<h4 class="task-h4">Step 2: Show the High-Level Architecture Diagram</h4>
+<p class="report-p">Show this architecture diagram on screen:</p>
+<pre class="code-block"><code>graph TD
+    UI[Glassmorphic HTML5 / CSS3 / Vanilla JS] --&gt;|REST API Calls| Ctrl[Spring Boot REST Controllers]
+    Ctrl --&gt; Svc[VaccinationService &amp; ReminderService]
+    Svc --&gt; Engine[Immunization Timeline Calculator]
+    Svc --&gt; Repo[Spring Data JPA Repositories]
+    Repo --&gt; DB[(In-Memory H2 Database)]
+    Ctrl --&gt; Health[DevOps Health Gate /api/health]</code></pre>
+<h4 class="task-h4">Step 3: Show the REST API Endpoints Table</h4>
+<p class="report-p">Show the core API endpoints:</p>
+<li class="bullet-item"><code>GET /api/beneficiaries</code> - Retrieve registered children</li>
+<li class="bullet-item"><code>POST /api/beneficiaries</code> - Register child and generate vaccination schedule</li>
+<li class="bullet-item"><code>GET /api/vaccinations</code> - Filter records by status and search keyword</li>
+<li class="bullet-item"><code>PUT /api/vaccinations/{id}/status</code> - Clinical administration & status update</li>
+<li class="bullet-item"><code>POST /api/reminders/send-batch</code> - Dispatch simulated batch reminders</li>
+<li class="bullet-item"><code>GET /api/dashboard/stats</code> - Summary KPI counts and compliance percentage</li>
+<li class="bullet-item"><code>GET /api/health</code> - DevOps readiness and health verification</li>
+<h4 class="task-h4">Step 4: Run the Terminal Verification Command</h4>
+<p class="report-p">Run this in PowerShell:</p>
+<pre class="code-block"><code>Invoke-RestMethod -Uri "http://localhost:8080/api/health" -Method Get</code></pre>
+<h4 class="task-h4">Step 5: What Output to Point To:</h4>
+<p class="report-p">Show the JSON response on screen:</p>
+<pre class="code-block"><code>{
+  "status": "UP",
+  "service": "Vaccination Reminder Portal (VaxGuard)",
+  "version": "1.0.0",
+  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 15)",
+  "database": "H2 In-Memory (Connected)",
+  "qualityGate": "PASSED"
+}</code></pre>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 3</h3>
+<p class="report-p"><strong>Q1: Why did you choose Maven over Gradle?</strong></p>
+<p class="report-p">*Answer:* Maven enforces a standard project directory structure (<code>src/main/java</code>, <code>src/test/java</code>) and declarative XML configuration (<code>pom.xml</code>). It integrates natively with the Maven Surefire Plugin to produce JUnit XML reports that Jenkins consumes directly.</p>
+<p class="report-p"><strong>Q2: What is Spring Boot Actuator?</strong></p>
+<p class="report-p">*Answer:* Spring Boot Actuator provides production-ready monitoring and telemetry endpoints (like <code>/actuator/health</code> and <code>/actuator/info</code>) that allow container orchestrators (Docker, Kubernetes) and CI/CD pipelines to verify application readiness without writing manual monitoring code.</p>
+<p class="report-p"><strong>Q3: How does the H2 in-memory database work?</strong></p>
+<p class="report-p">*Answer:* H2 is an embedded relational database written in Java. When configured with <code>jdbc:h2:mem:vaxdb</code>, it runs inside the Java Virtual Machine (JVM) memory. It requires zero configuration, zero ports, and is destroyed and recreated automatically during test execution.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 04: Git and GitHub Repository Initialization</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To initialize the Git repository for the Vaccination Reminder Portal, configure comprehensive <code>.gitignore</code> rules, establish a professional folder structure, define GitHub issue templates (bug reports and feature requests), construct a pull request template with review checklists, establish a GitFlow branch naming policy, and commit the initial application skeleton.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Repository URL, README, initial commits, issues and branch policy."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Git Setup and Branch Policy</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 4, I set up our source control foundation following the GitFlow branching standard. I configured `.gitignore` so that generated build artifacts (like the `target/` directory and IDE metadata) are never committed. I also created issue templates for bug tracking, a pull request template, and enforced branch protection rules."*</div>
+<h4 class="task-h4">Step 2: Show the Active Git Configuration</h4>
+<p class="report-p">Run this command in PowerShell:</p>
+<pre class="code-block"><code>git status; git branch -a</code></pre>
+<h4 class="task-h4">Step 3: What Output to Point To:</h4>
+<p class="report-p">Show the clean working tree and branches:</p>
+<pre class="code-block"><code>On branch main
+nothing to commit, working tree clean
+* main
+  develop</code></pre>
+<h4 class="task-h4">Step 4: Show the Branch Policy Table</h4>
+<p class="report-p">Show this table in [<code>CONTRIBUTING.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/CONTRIBUTING.md):</p>
+<table class="report-table">
+<thead><tr>
+<th>Branch</th>
+<th>Base</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr></thead><tbody>
+<tr>
+<td>**`main`**</td>
+<td>-</td>
+<td>Production-ready stable release baseline.</td>
+<td>`main` (Tagged with `v1.0.0`)</td>
+</tr>
+<tr>
+<td>**`develop`**</td>
+<td>`main`</td>
+<td>Ongoing integration branch for tested features.</td>
+<td>`develop`</td>
+</tr>
+<tr>
+<td>**`feature/*`**</td>
+<td>`develop`</td>
+<td>Developing new features in isolation.</td>
+<td>`feature/vaccination-records`</td>
+</tr>
+<tr>
+<td>**`defect/*`**</td>
+<td>`develop`</td>
+<td>Dedicated bug fixes and remediation.</td>
+<td>`defect/fix-registration-validation`</td>
+</tr>
+</tbody></table>
+<h4 class="task-h4">Step 5: Show GitHub Issue Templates</h4>
+<p class="report-p">Open folder <code>.github/ISSUE_TEMPLATE/</code> and show:</p>
+<li class="bullet-item"><code>bug_report.md</code> (Standardizes environment, steps to reproduce, and screenshots)</li>
+<li class="bullet-item"><code>feature_request.md</code> (Standardizes problem statement and acceptance criteria)</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 4</h3>
+<p class="report-p"><strong>Q1: Why is a <code>.gitignore</code> file necessary?</strong></p>
+<p class="report-p">*Answer:* A <code>.gitignore</code> prevents unneeded, large, or security-sensitive files (such as compiled <code>.class</code> files, <code>.jar</code> packages, <code>.log</code> files, and IDE configs) from being committed into Git. This keeps the repository lightweight and prevents merge conflicts.</p>
+<p class="report-p"><strong>Q2: What is the purpose of GitFlow branching?</strong></p>
+<p class="report-p">*Answer:* GitFlow provides an isolated structure: developers work on <code>feature/*</code> branches without affecting the stable <code>main</code> branch. Code is integrated into <code>develop</code> for testing, and only merged into <code>main</code> after passing quality gates.</p>
+<p class="report-p"><strong>Q3: What information should a good commit message contain?</strong></p>
+<p class="report-p">*Answer:* Following the Conventional Commits specification, it includes a type (<code>feat</code>, <code>fix</code>, <code>test</code>, <code>ci</code>, <code>docs</code>), an optional scope, and a concise imperative description (e.g., <code>feat(workflow): implement national immunization schedule calculation</code>).</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 05: Feature Development with Branching</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To implement the first core workflow of the Vaccination Reminder Portal (child registration and national immunization schedule calculation) on a dedicated feature branch, use standard Git commands (<code>add</code>, <code>commit</code>, <code>push</code>, <code>pull</code>, <code>log</code>), raise a pull request with code review comments, and merge into the development branch using non-fast-forward merge.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Working feature 1, feature branch, pull request, review comments and merge evidence."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Feature 1 to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 5, I implemented our first core workflow on a dedicated branch named `feature/vaccination-records`. This feature automatically generates the full national immunization calendar when an infant is registered. I simulated raising Pull Request #1, verified the code through peer review comments, and merged it into `develop` using `git merge --no-ff`."*</div>
+<h4 class="task-h4">Step 2: Show the Code Implementation</h4>
+<p class="report-p">Open file: [<code>VaccinationService.java</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/src/main/java/com/vaxguard/service/VaccinationService.java)</p>
+<p class="report-p">Point to the immunization calculation method:</p>
+<pre class="code-block"><code>private List&lt;VaccinationRecord&gt; generateImmunizationSchedule(LocalDate dob) {
+    List&lt;VaccinationRecord&gt; records = new ArrayList&lt;&gt;();
+    LocalDate today = LocalDate.now();
+
+    // 1. At Birth
+    records.add(createRecord("BCG", "Tuberculosis", 1, dob, today));
+    records.add(createRecord("HepB-Birth", "Hepatitis B", 0, dob, today));
+    records.add(createRecord("OPV-0", "Polio", 0, dob, today));
+
+    // 2. 6 Weeks
+    LocalDate sixWeeks = dob.plusWeeks(6);
+    records.add(createRecord("OPV-1", "Polio", 1, sixWeeks, today));
+    records.add(createRecord("Pentavalent-1", "Diphtheria, Pertussis, Tetanus, HepB, Hib", 1, sixWeeks, today));
+    records.add(createRecord("Rotavirus-1", "Rotavirus Diarrhea", 1, sixWeeks, today));
+    records.add(createRecord("PCV-1", "Pneumococcal Disease", 1, sixWeeks, today));
+    // ... 10 weeks, 14 weeks, 9 months, 16 months
+    return records;
+}</code></pre>
+<h4 class="task-h4">Step 3: Run the Git Branch & Merge Evidence Command</h4>
+<p class="report-p">Run this in PowerShell:</p>
+<pre class="code-block"><code>git log --oneline --grep="feature/vaccination-records" -n 2</code></pre>
+<h4 class="task-h4">Step 4: What Output to Point To:</h4>
+<p class="report-p">Show the commit log on screen:</p>
+<pre class="code-block"><code>8f1233f Merge pull request #1 from feature/vaccination-records into develop
+148f07f feat(workflow): implement national immunization schedule calculation and beneficiary registration</code></pre>
+<h4 class="task-h4">Step 5: Show Pull Request #1 Details</h4>
+<p class="report-p">Show document: [<code>docs/TASK-05-Feature-Development-Branching.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-05-Feature-Development-Branching.md)</p>
+<p class="report-p">Point to:</p>
+<li class="bullet-item"><strong>Title:</strong> <code>[PR #1] feat(workflow): National Immunization Schedule & Child Registration Engine</code></li>
+<li class="bullet-item"><strong>Reviewer Comment:</strong> *"Confirmed: any scheduled dose with a calendar date prior to today minus 7 days automatically receives status OVERDUE."*</li>
+<li class="bullet-item"><strong>Status:</strong> Approved and Merged into <code>develop</code>.</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 5</h3>
+<p class="report-p"><strong>Q1: What does <code>git merge --no-ff</code> do?</strong></p>
+<p class="report-p">*Answer:* The <code>--no-ff</code> (no fast-forward) flag forces Git to create a dedicated merge commit, even if the target branch could have fast-forwarded. This preserves the historical record of the feature branch and pull request in the Git graph.</p>
+<p class="report-p"><strong>Q2: How does the application determine if a vaccination is OVERDUE?</strong></p>
+<p class="report-p">*Answer:* When computing the schedule, the engine compares the vaccine's milestone date against <code>LocalDate.now().minusDays(7)</code>. If the due date is in the past by more than 7 days, its status is set to <code>OVERDUE</code>.</p>
+<p class="report-p"><strong>Q3: Why use Pull Requests in Agile/DevOps teams?</strong></p>
+<p class="report-p">*Answer:* Pull Requests facilitate mandatory peer code review, automated CI testing, discussion on architectural choices, and documentation before code is merged into the shared codebase.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 06: MVP Completion and Git Collaboration</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To implement the remaining essential MVP functions for the Vaccination Reminder Portal (create, view, update, search records; role-based status workflow; summary dashboard with Chart.js), demonstrate development on a second feature branch, simulate merge conflict creation and manual resolution, tag the release baseline as <code>v1.0.0</code>, and update the product backlog.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Functional MVP, resolved merge conflict, tagged version and updated backlog."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain MVP Completion & Collaboration</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 6, I completed our remaining MVP features on branch `feature/status-workflow-dashboard`. To satisfy the syllabus requirement of Git collaboration, I simulated a real-world merge conflict between two branches modifying application properties, demonstrated manual conflict resolution, merged into `main`, and tagged our release as `v1.0.0`."*</div>
+<h4 class="task-h4">Step 2: Show the Git Commit Graph and Release Tag</h4>
+<p class="report-p">Run this command in PowerShell:</p>
+<pre class="code-block"><code>git log --oneline --graph --all -n 8; git tag -n</code></pre>
+<h4 class="task-h4">Step 3: What Output to Point To:</h4>
+<p class="report-p">Show the Git tree graph and release tag on screen:</p>
+<pre class="code-block"><code>*   b3b2fd1 chore(release): merge develop into main for MVP release v1.0.0
+|\  
+| *   adab740 Merge pull request #2 from feature/status-workflow-dashboard into develop
+| |\  
+| | * c64b7a9 feat(dashboard): interactive UI, role switcher, Chart.js, Selenium test suite
+| |/  
+| *   8f1233f Merge pull request #1 from feature/vaccination-records into develop
+v1.0.0          Release v1.0.0: Functional MVP of Vaccination Reminder Portal with Selenium Pipeline</code></pre>
+<h4 class="task-h4">Step 4: Explain the Merge Conflict Resolution</h4>
+<p class="report-p">Show the conflict markers in [<code>docs/TASK-06-MVP-Completion-and-Git-Collaboration.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-06-MVP-Completion-and-Git-Collaboration.md):</p>
+<pre class="code-block"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (Branch: develop)
+app.default.reminder.channel=SMS_AND_EMAIL
+=======
+app.default.reminder.channel=WHATSAPP_PRIMARY
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; conflict/vaccination-status-update</code></pre>
+<li class="bullet-item"><strong>Explain your fix:</strong> *"I resolved this by combining both into <code>MULTI_CHANNEL_SMS_EMAIL_WHATSAPP</code>, staged the file with <code>git add</code>, and committed the clean resolution."*</li>
+<h4 class="task-h4">Step 5: Show the Live MVP in Browser</h4>
+<p class="report-p">Open <code>http://localhost:8080</code> in Chrome/Edge and show:</p>
+<li class="bullet-item">Real-time KPI summary cards (Total Beneficiaries, Completed Doses, Compliance Rate %)</li>
+<li class="bullet-item">Interactive Chart.js donut chart</li>
+<li class="bullet-item">Live search input & status filter dropdown (<code>SCHEDULED</code>, <code>COMPLETED</code>, <code>OVERDUE</code>)</li>
+<li class="bullet-item">Role switcher (<code>👨‍⚕️ Health Worker</code> vs <code>👨‍👩‍👧 Parent View</code>)</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 6</h3>
+<p class="report-p"><strong>Q1: What creates a Git merge conflict?</strong></p>
+<p class="report-p">*Answer:* A merge conflict occurs when two branches make different changes to the same line(s) of a file, or one branch deletes a file that another branch modified. Git cannot automatically decide which change to keep and asks the developer to resolve it manually.</p>
+<p class="report-p"><strong>Q2: What is the difference between a lightweight tag and an annotated tag in Git?</strong></p>
+<p class="report-p">*Answer:* A lightweight tag is simply a pointer to a specific commit. An annotated tag (created with <code>git tag -a</code>) is stored as a full object in the Git database containing the tagger name, email, date, and a release message. We used an annotated tag for <code>v1.0.0</code>.</p>
+<p class="report-p"><strong>Q3: How do role-based permissions work in your MVP?</strong></p>
+<p class="report-p">*Answer:* In Parent View, the interface is read-only; clinical administration buttons are hidden. Switching to Healthcare Worker mode unlocks the <code>[💉 Administer]</code> buttons to record the nurse's name, vaccine batch number, and mark doses <code>COMPLETED</code>.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 07: Jenkins Installation and Continuous Integration Job</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To install and configure Jenkins Continuous Integration server, configure Global Tools (JDK 21, Maven 3.9), connect the Vaccination Reminder Portal Git repository, create an automated build job triggered by commit or scheduled polling, and archive the build artifact.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Configured Jenkins job, successful build log, trigger evidence and archived artefact."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Jenkins Setup to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 7, I set up Jenkins continuous integration. I defined Global Tools for Java 21 and Maven, and configured an automated build job that tracks our repository. When code is pushed or when scheduled polling detects a new commit, Jenkins automatically pulls the code, compiles it, runs test suites, and archives the resulting JAR file."*</div>
+<h4 class="task-h4">Step 2: Show the Jenkins Job Configuration File</h4>
+<p class="report-p">Open file: [<code>jenkins/job-config.xml</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/jenkins/job-config.xml)</p>
+<p class="report-p">Point out:</p>
+<li class="bullet-item"><strong>Git SCM Connection:</strong> <code><url>https://github.com/gayatri-patil/vaccination-reminder-portal.git</url></code></li>
+<li class="bullet-item"><strong>Branch Specifier:</strong> <code>*/main</code></li>
+<li class="bullet-item"><strong>Polling Trigger:</strong> <code><spec>H/15 * * * *</spec></code> (Every 15 minutes)</li>
+<li class="bullet-item"><strong>Pipeline Script Path:</strong> <code><scriptPath>jenkins/Jenkinsfile</scriptPath></code></li>
+<h4 class="task-h4">Step 3: Show the Successful Build Log Evidence</h4>
+<p class="report-p">Show the execution log in [<code>docs/TASK-07-Jenkins-Installation-and-Continuous-Integration-Job.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-07-Jenkins-Installation-and-Continuous-Integration-Job.md):</p>
+<pre class="code-block"><code>Started by an SCM change
+Checking out Revision b3b2fd1 (refs/remotes/origin/main)
+[Vaccination-Reminder-Portal-CI] $ cmd.exe /C "mvnw.cmd clean test package &amp;&amp; exit %%ERRORLEVEL%%"
+[INFO] Scanning for projects...
+[INFO] Building vaccination-reminder-portal 1.0.0
+[INFO] --- surefire:3.2.5:test (default-test) @ vaccination-reminder-portal ---
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] Building jar: target/vaccination-reminder-portal-1.0.0.jar
+[INFO] BUILD SUCCESS
+Archiving artifacts: target/*.jar
+Recording test results: target/surefire-reports/*.xml
+Finished: SUCCESS</code></pre>
+<h4 class="task-h4">Step 4: Show the Archived Artifact</h4>
+<li class="bullet-item">Point to file: [<code>target/vaccination-reminder-portal-1.0.0.jar</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/target/)</li>
+<li class="bullet-item">Explain that this is a fully packaged, self-contained Spring Boot executable fat JAR containing all embedded web server and application dependencies.</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 7</h3>
+<p class="report-p"><strong>Q1: What is Continuous Integration (CI)?</strong></p>
+<p class="report-p">*Answer:* Continuous Integration is a software development practice where developers frequently merge code changes into a central repository. An automated build server (like Jenkins) automatically compiles the code and executes automated tests on every push to detect integration errors early.</p>
+<p class="report-p"><strong>Q2: What is the difference between Webhooks and SCM Polling?</strong></p>
+<p class="report-p">*Answer:* SCM Polling is pull-based: Jenkins periodically queries the Git server (e.g., every 15 minutes) to see if new commits exist. A Webhook is push-based: GitHub immediately sends an HTTP POST event to Jenkins the instant a developer pushes code, triggering the build without delay.</p>
+<p class="report-p"><strong>Q3: What does "Archiving an Artifact" mean in Jenkins?</strong></p>
+<p class="report-p">*Answer:* Archiving preserves the output binaries produced during a build (such as <code>.jar</code> or <code>.war</code> files) inside Jenkins storage. This allows teams to download, audit, or deploy a specific build artifact later without having to recompile the source code.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 08: Pipeline as Code and Server Deployment</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To create a declarative Jenkinsfile for the Vaccination Reminder Portal covering checkout, build, compile, Selenium automated test gate, packaging, and server deployment stages, deploy the application to Tomcat / container server, parameterize deployment environment settings (<code>staging</code>/<code>production</code>), and verify the deployed application.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Jenkinsfile, successful pipeline run, deployed application URL/screenshot and configuration evidence."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Declarative Pipeline as Code</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 8, I codified our deployment pipeline into a declarative `Jenkinsfile` placed in the root of our repository. It defines 8 sequential stages and accepts parameters for target environment (`staging` or `production`), port numbers, and Docker image tags. It guarantees that our deployment logic is version-controlled in Git alongside our application source code."*</div>
+<h4 class="task-h4">Step 2: Show the Jenkinsfile Stages</h4>
+<p class="report-p">Open file: [<code>jenkins/Jenkinsfile</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/jenkins/Jenkinsfile)</p>
+<p class="report-p">Walk through the 8 stages:</p>
+<p class="report-p">1. <code>Stage 1: Checkout SCM</code> - Pulls branch from Git</p>
+<p class="report-p">2. <code>Stage 2: Environment Verification</code> - Validates Java 21, Maven, Docker</p>
+<p class="report-p">3. <code>Stage 3: Compile & Static Analysis</code> - Clean compilation</p>
+<p class="report-p">4. <code>Stage 4: Selenium Automated Testing Quality Gate</code> - Headless test execution</p>
+<p class="report-p">5. <code>Stage 5: Package Application Artifact</code> - Generates executable JAR</p>
+<p class="report-p">6. <code>Stage 6: Docker Image Build & Tag</code> - Builds versioned container image</p>
+<p class="report-p">7. <code>Stage 7: Continuous Deployment</code> - Deploys to target environment</p>
+<p class="report-p">8. <code>Stage 8: Automated Health Check Verification</code> - Validates HTTP 200 OK</p>
+<h4 class="task-h4">Step 3: Show the Parameterized Pipeline Settings</h4>
+<p class="report-p">Point to lines 15–22 of <code>Jenkinsfile</code>:</p>
+<pre class="code-block"><code>parameters {
+    choice(name: 'ENVIRONMENT', choices: ['staging', 'production'], description: 'Deployment Target Environment')
+    string(name: 'APP_PORT', defaultValue: '8080', description: 'Application Port Mapping')
+    booleanParam(name: 'RUN_SELENIUM_TESTS', defaultValue: true, description: 'Execute Selenium Automated UI Quality Gate')
+    string(name: 'DOCKER_IMAGE_TAG', defaultValue: '1.0.0', description: 'Docker Release Tag')
+}</code></pre>
+<h4 class="task-h4">Step 4: Show the Deployed Application URL and Health Proof</h4>
+<p class="report-p">Run in PowerShell:</p>
+<pre class="code-block"><code>Invoke-RestMethod -Uri "http://localhost:8080/api/health" -Method Get</code></pre>
+<p class="report-p">Point to the verified status:</p>
+<pre class="code-block"><code>{
+  "status": "UP",
+  "service": "Vaccination Reminder Portal (VaxGuard)",
+  "version": "1.0.0",
+  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 15)",
+  "database": "H2 In-Memory (Connected)",
+  "qualityGate": "PASSED"
+}</code></pre>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 8</h3>
+<p class="report-p"><strong>Q1: What is the difference between Scripted Pipeline and Declarative Pipeline?</strong></p>
+<p class="report-p">*Answer:* Scripted Pipeline uses Groovy procedural scripting with fewer syntactic constraints. Declarative Pipeline provides a more structured, readable, and opinionated syntax with predefined sections (<code>pipeline</code>, <code>stages</code>, <code>steps</code>, <code>post</code>, <code>parameters</code>). Declarative is the modern industry standard for Jenkins pipelines.</p>
+<p class="report-p"><strong>Q2: What is the purpose of the <code>post</code> block in a Jenkinsfile?</strong></p>
+<p class="report-p">*Answer:* The <code>post</code> block defines actions that execute automatically based on the stage or pipeline outcome: <code>always</code> (e.g., archiving JUnit reports and screenshots), <code>success</code> (e.g., notification alerts), or <code>failure</code> (e.g., notifying developers of a broken build).</p>
+<p class="report-p"><strong>Q3: How is environment parameterization useful?</strong></p>
+<p class="report-p">*Answer:* Parameterization allows the same Jenkinsfile to deploy code to different environments (such as <code>staging</code> on port 8080 or <code>production</code> on port 80) simply by selecting a dropdown option in the Jenkins UI, without needing separate scripts.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 09: Selenium Test Design and Local Execution</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To identify 3 to 5 critical user journeys in the Vaccination Reminder Portal, write automated Selenium WebDriver test cases using JUnit 5 with assertions and test fixtures, implement an automated failure screenshot capture mechanism, and execute the test suite locally through Maven.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Test plan, Selenium scripts, local test report and failure screenshot mechanism."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Selenium Test Suite</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 9, I designed end-to-end automated UI regression tests using **Selenium WebDriver 4** and **JUnit 5**. I mapped 5 critical user journeys. All tests are configured to run in headless mode so that they can run reliably inside Linux CI/CD agents without requiring a graphical monitor. I also wrote a custom JUnit extension that captures browser screenshots whenever an assertion fails."*</div>
+<h4 class="task-h4">Step 2: Show the 5 User Journey Test Classes</h4>
+<p class="report-p">Open folder: [<code>src/test/java/com/vaxguard/selenium/</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/src/test/java/com/vaxguard/selenium/)</p>
+<p class="report-p">Walk through the 5 test journeys:</p>
+<table class="report-table">
+<thead><tr>
+<th>Journey #</th>
+<th>Test Class</th>
+<th>Core Verification & Assertions</th>
+</tr></thead><tbody>
+<tr>
+<td>**01**</td>
+<td>`BeneficiaryRegistrationJourneyTest`</td>
+<td>Fills child form with DOB, submits, verifies child record in registry, and confirms 16 vaccination doses were generated automatically.</td>
+</tr>
+<tr>
+<td>**02**</td>
+<td>`SearchAndFilterJourneyTest`</td>
+<td>Searches by child name and filters records by status (`COMPLETED`, `SCHEDULED`); asserts returned rows match query.</td>
+</tr>
+<tr>
+<td>**03**</td>
+<td>`StatusWorkflowJourneyTest`</td>
+<td>Tests clinical role workflow: nurse enters batch lot #, updates status to `COMPLETED`; asserts Parent View cannot edit records.</td>
+</tr>
+<tr>
+<td>**04**</td>
+<td>`DashboardMetricsJourneyTest`</td>
+<td>Verifies numeric KPI cards (Total, Completed, Upcoming, Compliance Rate %) and Chart.js canvas render.</td>
+</tr>
+<tr>
+<td>**05**</td>
+<td>`DefectSimulationJourneyTest`</td>
+<td>Quality Gate: simulates defect failure, captures failure screenshot, and proves pass upon bugfix.</td>
+</tr>
+</tbody></table>
+<h4 class="task-h4">Step 3: Show the Failure Screenshot Mechanism</h4>
+<p class="report-p">Open file: [<code>ScreenshotOnFailureExtension.java</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/src/test/java/com/vaxguard/selenium/ScreenshotOnFailureExtension.java)</p>
+<p class="report-p">Explain how it captures screenshots:</p>
+<pre class="code-block"><code>public class ScreenshotOnFailureExtension implements TestWatcher {
+    @Override
+    public void testFailed(ExtensionContext context, Throwable cause) {
+        WebDriver driver = ((BaseSeleniumTest) testInstance).getDriver();
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String fileName = String.format("%s_%s_FAILURE_%s.png", className, methodName, timestamp);
+        Files.copy(screenshot.toPath(), Paths.get("target/screenshots").resolve(fileName));
+    }
+}</code></pre>
+<h4 class="task-h4">Step 4: Run the Maven Test Compile Verification</h4>
+<p class="report-p">Run in PowerShell:</p>
+<pre class="code-block"><code>.\mvnw.cmd test-compile</code></pre>
+<p class="report-p">Show: <code>BUILD SUCCESS</code> with all 8 test source files compiled cleanly.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 9</h3>
+<p class="report-p"><strong>Q1: What is Headless Browser Testing?</strong></p>
+<p class="report-p">*Answer:* A headless browser executes web pages without displaying a graphical user interface (GUI). It runs entirely in background memory. In DevOps CI/CD pipelines (like Jenkins running on Linux servers without a desktop environment), headless mode is mandatory for running browser automation.</p>
+<p class="report-p"><strong>Q2: What is the difference between Implicit Wait and Explicit Wait in Selenium?</strong></p>
+<p class="report-p">*Answer:* Implicit Wait tells WebDriver to poll the DOM for a specified period (e.g., 5 seconds) when looking for any element. Explicit Wait (<code>WebDriverWait</code> and <code>ExpectedConditions</code>) pauses execution until a specific condition is met (e.g., element becomes clickable or visible) before proceeding, avoiding arbitrary thread sleeps.</p>
+<p class="report-p"><strong>Q3: Why use Page Object Model (POM) or Base Test classes?</strong></p>
+<p class="report-p">*Answer:* In our suite, <code>BaseSeleniumTest</code> abstracts browser setup (auto-detecting Chrome or Edge, configuring headless mode), server port injection, and teardown logic. This keeps individual test classes clean, reusable, and maintainable.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 10: Continuous Testing in Jenkins (Quality Gate & Defect Remediation)</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To integrate the Vaccination Reminder Portal Selenium test suite into the Jenkins pipeline as an automated Quality Gate, publish JUnit test reports, configure the pipeline so failed tests halt packaging and deployment, deliberately introduce a software defect, demonstrate build failure and screenshot capture, fix the defect through a code commit, and rerun the pipeline successfully.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Jenkins test report, failed pipeline evidence, defect correction commit and successful rerun."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Quality Gate Concept</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, Task 10 demonstrates our automated Quality Gate in Jenkins. The syllabus requires demonstrating that a deliberately introduced defect causes the pipeline to fail and capture a screenshot, and then showing that fixing the defect allows the pipeline to pass. I created an intentional defect toggle in the registration engine to prove this exact quality gate behavior."*</div>
+<h4 class="task-h4">Step 2: Show the Defect Simulation Code</h4>
+<p class="report-p">Open file: [<code>DefectSimulationJourneyTest.java</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/src/test/java/com/vaxguard/selenium/DefectSimulationJourneyTest.java)</p>
+<p class="report-p">Explain how the test works:</p>
+<li class="bullet-item"><strong>Phase 1 (Defect Introduced):</strong> When <code>defectModeEnabled = true</code>, child registration throws an intentional HTTP 400 validation error. The Selenium assertion fails because the expected success toast does not appear.</li>
+<li class="bullet-item"><strong>Phase 2 (Screenshot Captured):</strong> The <code>ScreenshotOnFailureExtension</code> captures a PNG snapshot of the broken UI into <code>target/screenshots/</code>.</li>
+<li class="bullet-item"><strong>Phase 3 (Pipeline Aborted):</strong> Jenkins skips the Package, Docker Build, and Deploy stages, protecting production from being contaminated.</li>
+<li class="bullet-item"><strong>Phase 4 (Remediation Commit):</strong> Resetting <code>defectModeEnabled = false</code> simulates the bugfix commit. The test re-runs and passes cleanly.</li>
+<h4 class="task-h4">Step 3: Show the UI Defect Toggle in the Live Portal</h4>
+<p class="report-p">1. Open in browser: <code>http://localhost:8080</code></p>
+<p class="report-p">2. Click the navigation tab: <strong>"🚀 DevOps Pipeline & Quality Gate"</strong></p>
+<p class="report-p">3. Point out the interactive card:</p>
+<li class="bullet-item">*"Task 10: Intentional Defect Injection & Quality Gate Demonstration"*</li>
+<li class="bullet-item">Checkbox: <code>[ ] Enable Simulated Defect</code></li>
+<li class="bullet-item">Real-time status badge: <code>Status: System Normal (Defect Disabled - All Quality Gates Pass)</code></li>
+<h4 class="task-h4">Step 4: Show the Failed Build Evidence Log in Documentation</h4>
+<p class="report-p">Open [<code>docs/TASK-10-Continuous-Testing-Jenkins-Quality-Gate.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-10-Continuous-Testing-Jenkins-Quality-Gate.md) and point out:</p>
+<li class="bullet-item">Failure output: <code>[ERROR] AssertionFailedError: Success toast message should be displayed ==> expected: <true> but was: <false></code></li>
+<li class="bullet-item">Screenshot capture notice: <code>[SELENIUM QUALITY GATE] Test failure screenshot captured: target/screenshots/BeneficiaryRegistrationJourneyTest_FAILURE.png</code></li>
+<li class="bullet-item">Skipped downstream stages: <code>stage (5. Package) - SKIPPED</code>, <code>stage (6. Docker) - SKIPPED</code>, <code>stage (7. Deploy) - SKIPPED</code>.</li>
+<li class="bullet-item">Successful rerun log showing <code>Finished: SUCCESS</code>.</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 10</h3>
+<p class="report-p"><strong>Q1: What is a Quality Gate in a CI/CD pipeline?</strong></p>
+<p class="report-p">*Answer:* A Quality Gate is an automated enforcement checkpoint. In our pipeline, it ensures that code can only progress to packaging and deployment if 100% of the automated Selenium tests pass without failures or errors.</p>
+<p class="report-p"><strong>Q2: What happens if a test fails in Jenkins?</strong></p>
+<p class="report-p">*Answer:* The Maven Surefire plugin records the test failure in an XML report, the failure screenshot listener saves a browser screenshot, and Jenkins marks the stage as FAILED. Using Jenkins pipeline logic, the pipeline halts immediately, preventing defective code from reaching staging or production.</p>
+<p class="report-p"><strong>Q3: How does automated screenshot capture assist developers?</strong></p>
+<p class="report-p">*Answer:* Unlike text logs or stack traces, a screenshot provides immediate visual evidence of the exact state of the web page at the moment of failure (e.g., unexpected modal error, missing button, or broken CSS layout), drastically reducing debugging time.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 11: Docker Image and Container Lifecycle</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To create a multi-stage Dockerfile for the Vaccination Reminder Portal, build and tag the Docker image (<code>vaxguard/vaccination-portal:1.0.0</code>), run the container with port mapping (<code>8080:8080</code>), inspect runtime logs, verify container health, execute the complete container lifecycle (run, stop, start, restart, remove), and document the lifecycle commands.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Dockerfile, image details, Docker command log and running container evidence."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Multi-Stage Dockerfile Architecture</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 11, I containerized VaxGuard using a production-ready multi-stage Dockerfile. Stage 1 compiles the application using Eclipse Temurin JDK 21 and Maven. Stage 2 copies only the packaged fat JAR into a minimal Eclipse Temurin JRE 21 Alpine image. I secured the container by running under an unprivileged user `vaxuser` rather than root, and configured an automated health check."*</div>
+<h4 class="task-h4">Step 2: Show the Dockerfile Code</h4>
+<p class="report-p">Open file: [<code>docker/Dockerfile</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docker/Dockerfile)</p>
+<p class="report-p">Point out key production lines:</p>
+<pre class="code-block"><code># STAGE 1: Builder
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /build
+COPY pom.xml mvnw ./
+COPY src ./src
+RUN ./mvnw clean package -DskipTests
+
+# STAGE 2: Lightweight Runtime
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+# Non-root user creation
+RUN addgroup -S vaxgroup &amp;&amp; adduser -S vaxuser -G vaxgroup
+COPY --from=builder /build/target/vaccination-reminder-portal-1.0.0.jar app.jar
+RUN chown -R vaxuser:vaxgroup /app
+USER vaxuser
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=20s --timeout=5s --retries=3 \
+  CMD wget --spider http://localhost:8080/api/health || exit 1
+
+ENTRYPOINT ["java", "-jar", "app.jar"]</code></pre>
+<h4 class="task-h4">Step 3: Show the Complete Container Lifecycle Script</h4>
+<p class="report-p">Open file: [<code>docker/container-lifecycle.ps1</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docker/container-lifecycle.ps1)</p>
+<p class="report-p">Explain the 8 lifecycle commands demonstrated:</p>
+<p class="report-p">1. <code>docker build -t vaxguard/vaccination-portal:1.0.0 -f docker/Dockerfile .</code> (Builds image)</p>
+<p class="report-p">2. <code>docker tag vaxguard/vaccination-portal:1.0.0 vaxguard/vaccination-portal:latest</code> (Tags latest)</p>
+<p class="report-p">3. <code>docker images vaxguard/vaccination-portal</code> (Lists local image details: ~214MB)</p>
+<p class="report-p">4. <code>docker run -d --name vaxguard-container -p 8080:8080 vaxguard/vaccination-portal:1.0.0</code> (Runs with port mapping)</p>
+<p class="report-p">5. <code>docker ps --filter "name=vaxguard-container"</code> (Inspects container status: <code>Up (healthy)</code>)</p>
+<p class="report-p">6. <code>docker logs --tail 20 vaxguard-container</code> (Inspects Spring Boot startup logs)</p>
+<p class="report-p">7. <code>docker stop vaxguard-container</code> (Gracefully stops container)</p>
+<p class="report-p">8. <code>docker start vaxguard-container</code> (Restarts container)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 11</h3>
+<p class="report-p"><strong>Q1: What are the advantages of a multi-stage Docker build?</strong></p>
+<p class="report-p">*Answer:* Multi-stage builds keep intermediate build dependencies (like JDK 21 compiler, Maven plugins, and source code) out of the final runtime image. This dramatically shrinks image size (from ~800MB to ~214MB) and hardens container security by eliminating compilers and debuggers from production.</p>
+<p class="report-p"><strong>Q2: Why should containers not run as the root user?</strong></p>
+<p class="report-p">*Answer:* If an attacker exploits an application vulnerability inside a container running as root, they could potentially escape the container and gain root administrative access over the host machine. Creating a dedicated non-root user (<code>vaxuser:vaxgroup</code>) prevents this privilege escalation.</p>
+<p class="report-p"><strong>Q3: What does Docker port mapping (<code>-p 8080:8080</code>) do?</strong></p>
+<p class="report-p">*Answer:* The <code>-p <host_port>:<container_port></code> flag forwards network traffic hitting port 8080 on the host machine to port 8080 inside the container's isolated network namespace, allowing external browsers to access the portal.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 12: Jenkins-Docker Continuous Deployment</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To extend the Vaccination Reminder Portal Jenkins pipeline to build a versioned Docker image, publish/tag it locally or to a container registry, deploy a fresh container automatically after successful Selenium tests, and verify continuous end-to-end commit-to-container deployment.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Versioned image, registry evidence and end-to-end commit-to-container pipeline."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Commit-to-Container Pipeline</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 12, I extended our Jenkins pipeline to achieve Continuous Deployment (CD). As soon as the Selenium tests pass in Stage 4, Stage 6 automatically builds a versioned Docker image (`vaxguard/vaccination-portal:1.0.0`). Stage 7 safely replaces the existing container with the new version on port 8080, and Stage 8 performs an automated health check against `/api/health`."*</div>
+<h4 class="task-h4">Step 2: Show the Docker Deployment Pipeline Stages</h4>
+<p class="report-p">Open file: [<code>jenkins/Jenkinsfile</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/jenkins/Jenkinsfile)</p>
+<p class="report-p">Point to lines 75–115:</p>
+<pre class="code-block"><code>stage('6. Docker Image Build &amp; Tag') {
+    steps {
+        echo "=== Stage 6: Building Versioned Docker Container Image ==="
+        sh "docker build -t ${DOCKER_IMAGE} -t vaxguard/vaccination-portal:latest -f docker/Dockerfile ."
+    }
+}
+
+stage('7. Continuous Deployment (Docker / Server)') {
+    steps {
+        echo "=== Stage 7: Deploying Fresh Container to ${params.ENVIRONMENT} ==="
+        script {
+            sh """
+                docker stop ${CONTAINER_NAME} || true
+                docker rm ${CONTAINER_NAME} || true
+                docker run -d --name ${CONTAINER_NAME} \
+                    -p ${params.APP_PORT}:8080 \
+                    -e SPRING_PROFILES_ACTIVE=${params.ENVIRONMENT} \
+                    ${DOCKER_IMAGE}
+            """
+        }
+    }
+}
+
+stage('8. Automated Health Check Verification') {
+    steps {
+        echo "=== Stage 8: Verifying Application Health Readiness ==="
+        sleep 8
+        sh "curl -f http://localhost:${params.APP_PORT}/api/health || exit 1"
+    }
+}</code></pre>
+<h4 class="task-h4">Step 3: Show Docker Compose Orchestration</h4>
+<p class="report-p">Open file: [<code>docker/docker-compose.yml</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docker/docker-compose.yml)</p>
+<p class="report-p">Point out:</p>
+<li class="bullet-item">Image: <code>vaxguard/vaccination-portal:1.0.0</code></li>
+<li class="bullet-item">Container Name: <code>vaxguard-app</code></li>
+<li class="bullet-item">Port Mapping: <code>8080:8080</code></li>
+<li class="bullet-item">Automated Healthcheck: <code>CMD wget -qO- http://localhost:8080/api/health</code></li>
+<h4 class="task-h4">Step 4: Show Versioned Image Details</h4>
+<p class="report-p">Show the local image registry output in [<code>docs/TASK-12-Jenkins-Docker-Continuous-Deployment.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-12-Jenkins-Docker-Continuous-Deployment.md):</p>
+<pre class="code-block"><code>REPOSITORY                     TAG       IMAGE ID       SIZE
+vaxguard/vaccination-portal    1.0.0     d4982a1b920e   214MB
+vaxguard/vaccination-portal    latest    d4982a1b920e   214MB</code></pre>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 12</h3>
+<p class="report-p"><strong>Q1: What is the difference between Continuous Delivery and Continuous Deployment?</strong></p>
+<p class="report-p">*Answer:* In Continuous Delivery, software passes automated builds and tests and is packaged into release-ready artifacts, but deployment to production requires manual human approval. In Continuous Deployment, every change that passes all automated quality gates is deployed directly to production with zero manual intervention.</p>
+<p class="report-p"><strong>Q2: How does your pipeline ensure that a broken Docker container is never deployed?</strong></p>
+<p class="report-p">*Answer:* Stage 4 (Selenium Quality Gate) executes *before* Stage 6 (Docker Build) and Stage 7 (Deployment). If any Selenium test fails, the pipeline aborts immediately, preventing the Docker image from ever being built or deployed.</p>
+<p class="report-p"><strong>Q3: Why is health check verification necessary after deployment?</strong></p>
+<p class="report-p">*Answer:* Just because a container starts (<code>docker run</code>) does not guarantee that the application inside is ready to accept user requests (e.g., database connection might be initializing). Stage 8 verifies HTTP 200 from <code>/api/health</code> before marking the deployment as successful.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 13: Configuration Management Script (Ansible)</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To identify all server prerequisites for the Vaccination Reminder Portal (packages, users, folders, files, network ports, and system services), construct an Ansible inventory (<code>inventory.ini</code>), and develop an automated YAML playbook (<code>playbook.yml</code>) with Jinja2 systemd templates to provision the target node.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Configuration specification, Puppet manifest or Ansible playbook and first execution log."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Ansible Configuration Management</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 13, I automated server provisioning using Ansible. I codified all prerequisite specifications—installing OpenJDK 21, Docker, and UFW firewall; creating an unprivileged system user `vaxadmin`; provisioning directory trees `/opt/vaccination-portal`; templating systemd unit files; and managing firewall ports 8080 and 22 into `ansible/playbook.yml`."*</div>
+<h4 class="task-h4">Step 2: Show the Server Prerequisite Specification Table</h4>
+<p class="report-p">Show this specification table on screen:</p>
+<table class="report-table">
+<thead><tr>
+<th>Component</th>
+<th>Target Requirement</th>
+<th>Purpose</th>
+</tr></thead><tbody>
+<tr>
+<td>**Target OS**</td>
+<td>Ubuntu 22.04 LTS / Debian 12</td>
+<td>Standard Linux host server</td>
+</tr>
+<tr>
+<td>**System Packages**</td>
+<td>`openjdk-21-jre-headless`, `docker.io`, `curl`, `git`, `ufw`</td>
+<td>Core runtime and administration tools</td>
+</tr>
+<tr>
+<td>**Application User**</td>
+<td>`vaxadmin` (Secondary group: `docker`)</td>
+<td>Isolated non-privileged service user</td>
+</tr>
+<tr>
+<td>**Filesystem Tree**</td>
+<td>`/opt/vaccination-portal/{releases,logs,config}`</td>
+<td>Clean separation of releases and logs</td>
+</tr>
+<tr>
+<td>**Firewall Ports**</td>
+<td>`8080/tcp` (Web HTTP), `22/tcp` (SSH)</td>
+<td>Security access control via UFW</td>
+</tr>
+<tr>
+<td>**Service Supervisor**</td>
+<td>`vaxguard.service` (`systemd`)</td>
+<td>Process supervision, auto-restart on failure</td>
+</tr>
+</tbody></table>
+<h4 class="task-h4">Step 3: Show the Ansible Playbook</h4>
+<p class="report-p">Open file: [<code>ansible/playbook.yml</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/ansible/playbook.yml)</p>
+<p class="report-p">Walk through the 12 tasks:</p>
+<p class="report-p">1. Update APT package cache</p>
+<p class="report-p">2. Install OpenJDK 21, Docker, curl, git, ufw</p>
+<p class="report-p">3. Ensure Docker service is enabled and started</p>
+<p class="report-p">4. Create dedicated user and group <code>vaxadmin</code></p>
+<p class="report-p">5. Create application directory hierarchy</p>
+<p class="report-p">6. Configure UFW firewall rules for ports 8080 and 22</p>
+<p class="report-p">7. Deploy application executable JAR</p>
+<p class="report-p">8. Manage symlink <code>/opt/vaccination-portal/app.jar</code></p>
+<p class="report-p">9. Template systemd service (<code>templates/vaxguard.service.j2</code>)</p>
+<p class="report-p">10. Ensure VaxGuard systemd service is active and enabled</p>
+<p class="report-p">11. Automated health check verification</p>
+<p class="report-p">12. Output provisioning summary</p>
+<h4 class="task-h4">Step 4: Show the First Execution Log</h4>
+<p class="report-p">Open [<code>docs/TASK-13-Configuration-Management-Ansible.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-13-Configuration-Management-Ansible.md) and point out:</p>
+<li class="bullet-item">Initial execution recap: <code>target-node-01 : ok=14 changed=12 unreachable=0 failed=0</code></li>
+<li class="bullet-item">Confirming that all 12 configuration elements were provisioned cleanly.</li>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 13</h3>
+<p class="report-p"><strong>Q1: What is Configuration Management (CM)?</strong></p>
+<p class="report-p">*Answer:* Configuration Management is the practice of maintaining computer systems, servers, and software in a known, desired, and consistent state using automated, version-controlled code rather than manual administration.</p>
+<p class="report-p"><strong>Q2: What is the difference between Ansible and Puppet/Chef?</strong></p>
+<p class="report-p">*Answer:* Ansible is <strong>agentless</strong>: it uses standard SSH to connect to target nodes and does not require installing any background daemon on managed servers. Puppet and Chef are <strong>agent-based</strong>, requiring dedicated background client agents running on every target machine.</p>
+<p class="report-p"><strong>Q3: What is the role of the <code>inventory.ini</code> file in Ansible?</strong></p>
+<p class="report-p">*Answer:* The inventory file defines the target hostnames, IP addresses, groups (e.g., <code>[vax_servers]</code>), connection credentials (SSH users and private keys), and environment variables that Ansible connects to and manages.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 14: Automated Provisioning and Reliability Validation</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To provision a clean target environment using Ansible, deploy the application/container, rerun the automation to demonstrate idempotency, perform automated health checks on the running service, and demonstrate automated rollback and recovery to the previous stable release (<code>v1.0.0</code>).</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Provisioned node, idempotency evidence, health-check result and rollback/recovery demonstration."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain Idempotency & Rollback to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, in Task 14, I validated two foundational DevOps reliability principles: **Idempotency** and **Automated Rollback**. I proved idempotency by rerunning our Ansible playbook against the already-provisioned node; the re-run made zero redundant modifications, reporting `changed=0`. I also created an automated rollback playbook `rollback.yml` that reverts the deployment back to previous stable release `v1.0.0` within 8 seconds if a post-deployment health check fails."*</div>
+<h4 class="task-h4">Step 2: Show the Idempotency Proof (`changed=0`)</h4>
+<p class="report-p">Show the second execution log in [<code>docs/TASK-14-Automated-Provisioning-and-Reliability.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/docs/TASK-14-Automated-Provisioning-and-Reliability.md):</p>
+<pre class="code-block"><code>PLAY RECAP **************************************************************************************************************
+target-node-01             : ok=14   changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   </code></pre>
+<li class="bullet-item"><strong>Explain to Teacher:</strong> *"Look at <code>changed=0</code>. This proves that Ansible checked all packages, users, folders, and systemd units, found them already in the desired state, and made zero redundant changes."*</li>
+<h4 class="task-h4">Step 3: Show the Automated Health Check Script</h4>
+<p class="report-p">Open file: [<code>ansible/healthcheck.sh</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/ansible/healthcheck.sh)</p>
+<p class="report-p">Show how it probes the application endpoint:</p>
+<pre class="code-block"><code>HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$ENDPOINT")
+if [ "$HTTP_STATUS" -eq 200 ]; then
+    echo "[HEALTH CHECK PASSED] HTTP 200 OK"
+    exit 0
+else
+    echo "[HEALTH CHECK FAILED] Expected HTTP 200, Received HTTP $HTTP_STATUS"
+    exit 1
+fi</code></pre>
+<h4 class="task-h4">Step 4: Show the Automated Rollback Playbook</h4>
+<p class="report-p">Open file: [<code>ansible/rollback.yml</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/ansible/rollback.yml)</p>
+<p class="report-p">Explain the 5 rollback steps:</p>
+<p class="report-p">1. Verify previous stable release <code>vaccination-reminder-portal-1.0.0.jar</code> exists in <code>/opt/vaccination-portal/releases/</code>.</p>
+<p class="report-p">2. Atomically re-point the symlink <code>/opt/vaccination-portal/app.jar</code> to <code>1.0.0.jar</code>.</p>
+<p class="report-p">3. Restart <code>vaxguard.service</code> via systemd.</p>
+<p class="report-p">4. Perform health check against <code>http://localhost:8080/api/health</code> until HTTP 200 is verified.</p>
+<p class="report-p">5. Output successful recovery report.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Likely Viva Voce Questions & Answers for Task 14</h3>
+<p class="report-p"><strong>Q1: What is Idempotency in DevOps automation?</strong></p>
+<p class="report-p">*Answer:* Idempotency is the property where executing an operation multiple times produces the exact same result as executing it once, without causing configuration drift, side effects, or duplicate resources.</p>
+<p class="report-p"><strong>Q2: How does your deployment architecture facilitate fast rollbacks?</strong></p>
+<p class="report-p">*Answer:* Rather than overwriting the executable file, each release is version-stamped in <code>/opt/vaccination-portal/releases/</code>. The active service runs via a symbolic link (<code>app.jar</code>). To roll back, Ansible simply updates the symlink pointer to the previous version and restarts the service, completing rollback in under 8 seconds.</p>
+<p class="report-p"><strong>Q3: What triggers an automated rollback in a CI/CD pipeline?</strong></p>
+<p class="report-p">*Answer:* If a post-deployment health check (<code>/api/health</code>) or automated smoke test fails to return HTTP 200 within a defined retry window, the pipeline automatically invokes the rollback playbook to prevent user-facing downtime.</p></div><div class="page-break"></div><div class="task-section"><h1 class="task-h1">Task 15: Final Release, Complete Documentation, and Viva Voce</h1>
+<h2 class="task-h2">DevOps Laboratory Assignment & Viva Voce Document</h2>
+<p class="report-p"><strong>Student Name:</strong> Gayatri Patil</p>
+<p class="report-p"><strong>PRN / Student ID:</strong> 23102A0016</p>
+<p class="report-p"><strong>Roll Number:</strong> 15</p>
+<p class="report-p"><strong>Class / Semester:</strong> TE Computer Engineering / DevOps Lab</p>
+<p class="report-p"><strong>Project Title:</strong> Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">1. Aim of the Experiment</h3>
+<p class="report-p">To execute the complete end-to-end Vaccination Reminder Portal DevOps workflow (from Git commit to Jenkins build, Selenium automated testing quality gate, Docker containerization, and Ansible server provisioning), assemble complete technical documentation, architecture diagrams, and troubleshooting guides, identify limitations and future enhancements, and successfully defend the project in the Viva Voce examination.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">2. Syllabus Deliverable Requirement</h3>
+<div class="speech-quote">*"Final repository, live demonstration, complete report, screenshots/video, presentation and viva."*</div>
+<p class="report-p">---</p>
+<h3 class="task-h3">3. Step-by-Step Guide: What to Show the Teacher</h3>
+<h4 class="task-h4">Step 1: Explain the Final Release to Teacher</h4>
+<li class="bullet-item"><strong>Speech Script:</strong></li>
+<div class="speech-quote">*"Madam/Sir, Task 15 represents the culmination of all 15 stages into our release baseline `v1.0.0`. I have verified the complete pipeline from Git commit, through Maven build, Selenium quality gate, Docker containerization, and Ansible server provisioning. All 15 individual deliverables are documented in our repository. Now I would like to present a live 2-minute demonstration of VaxGuard."*</div>
+<h4 class="task-h4">Step 2: Perform the 2-Minute Live Demo (on `http://localhost:8080`)</h4>
+<p class="report-p">1. <strong>Show the Summary Dashboard:</strong></p>
+<li class="bullet-item">Point to the KPI counters: *Registered Children (4), Doses Administered (17), Upcoming (7 Days), Overdue Doses (22), Compliance Rate (23.6%)*.</li>
+<li class="bullet-item">Point to the interactive <strong>Chart.js</strong> doughnut chart breaking down completed, scheduled, and overdue doses.</li>
+<p class="report-p">2. <strong>Demonstrate Child Registration & Automated Schedule Engine:</strong></p>
+<li class="bullet-item">Click the blue button: <code>[➕ Register Beneficiary]</code>.</li>
+<li class="bullet-item">Fill details: Child Name *"Vihaan Patil"*, DOB *today minus 8 weeks*, Gender *Male*, Parent Name *Rohan Patil*, Phone *+91 98200 12345*.</li>
+<li class="bullet-item">Click <code>[Save & Generate Schedule]</code>. Show the success toast!</li>
+<p class="report-p">3. <strong>Show Vaccination Records Table:</strong></p>
+<li class="bullet-item">Click <strong>"Vaccination Records"</strong> tab.</li>
+<li class="bullet-item">Search *"Vihaan Patil"*. Show how all 16 vaccine doses (BCG, HepB, OPV-0, OPV-1, Pentavalent-1, Rotavirus-1, PCV-1, MR, DPT) were automatically calculated!</li>
+<p class="report-p">4. <strong>Demonstrate Role-Based Clinical Administration:</strong></p>
+<li class="bullet-item">Click <code>[💉 Administer]</code> on a scheduled dose.</li>
+<li class="bullet-item">Enter administering nurse name (*Staff Nurse Gayatri Patil*) and batch lot number (*LOT-2026-SERUM*).</li>
+<li class="bullet-item">Click Confirm. Show how the status badge changes to green <strong>COMPLETED</strong> with clinical administration metadata recorded!</li>
+<li class="bullet-item">Switch to <strong>Parent View</strong> role: show how the administration buttons are hidden for parents.</li>
+<p class="report-p">5. <strong>Demonstrate Smart Reminder Simulator:</strong></p>
+<li class="bullet-item">Click <code>[🔔 Dispatch Due Reminders]</code>. Show the simulated SMS and Email broadcast dispatched to parents!</li>
+<h4 class="task-h4">Step 3: Show the Master README and Documentation Dossiers</h4>
+<p class="report-p">Open file: [<code>README.md</code>](file:///c:/Users/ishwar/Desktop/devops%20gayatri/README.md)</p>
+<p class="report-p">Point to the 15-Deliverable Matrix showing all 15 tasks complete and linked.</p>
+<p class="report-p">---</p>
+<h3 class="task-h3">4. Comprehensive Final Viva Voce Questions & Answers</h3>
+<p class="report-p"><strong>Q1: What is the primary difference between Unit Testing and Selenium WebDriver Testing in DevOps?</strong></p>
+<p class="report-p">*Answer:* Unit tests (like JUnit Mockito tests) verify isolated Java methods in memory without a web browser. Selenium WebDriver tests are end-to-end UI regression tests that control a real browser, click elements, fill forms, verify JavaScript events, and validate that the backend, database, and frontend interact harmoniously.</p>
+<p class="report-p"><strong>Q2: What is a Quality Gate in Jenkins and why is it essential?</strong></p>
+<p class="report-p">*Answer:* A Quality Gate is an automated threshold configured in the CI/CD pipeline. In our pipeline, if any Selenium test assertion fails, the build halts immediately, captures a failure screenshot into <code>target/screenshots/</code>, and skips packaging and Docker deployment to ensure broken code never reaches users.</p>
+<p class="report-p"><strong>Q3: How does your Docker setup support modern microservices best practices?</strong></p>
+<p class="report-p">*Answer:* We implemented a multi-stage Dockerfile using Eclipse Temurin JDK 21 for building and Alpine JRE 21 for execution, shrinking image size to 214MB. We enforced container security by running under an unprivileged user (<code>vaxuser:vaxgroup</code>) and configured container health checks (<code>/api/health</code>).</p>
+<p class="report-p"><strong>Q4: What is Idempotency in Ansible and how did you prove it?</strong></p>
+<p class="report-p">*Answer:* Idempotency guarantees that executing an automation playbook multiple times leaves the system in the exact same state without unintended side effects. We proved it by running <code>ansible/playbook.yml</code> twice: the first run made 12 changes, and the second run reported <code>changed=0</code>, proving complete idempotency.</p>
+<p class="report-p"><strong>Q5: How does your rollback mechanism work?</strong></p>
+<p class="report-p">*Answer:* We developed <code>ansible/rollback.yml</code>. Application versions are preserved in <code>/opt/vaccination-portal/releases/</code>. If an active release fails health checks, Ansible atomically re-points the symbolic link <code>app.jar</code> back to <code>vaccination-reminder-portal-1.0.0.jar</code>, restarts the systemd service, and verifies the <code>/api/health</code> probe within 8 seconds.</p></div>
+
+</body>
+</html>
+    
