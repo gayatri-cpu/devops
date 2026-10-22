@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Demo & Viva Guide | Gayatri Patil (23102A0016)</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      background: #090d16;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 30px 20px;
+    }
+    .guide-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .hero-header {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(99, 102, 241, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(12px);
+    }
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+    .hero-meta span {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .quick-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.95);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0ea5e9;
+    }
+    .task-card {
+      background: rgba(18, 24, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .task-card:hover {
+      border-color: rgba(14, 165, 233, 0.4);
+    }
+    .task-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #0ea5e9, #6366f1);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .task-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+    .section-block {
+      margin-bottom: 16px;
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .speech-box {
+      background: rgba(14, 165, 233, 0.08);
+      border-left: 4px solid #0ea5e9;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #e0f2fe;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .cmd-box {
+      background: #060911;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 13px;
+      color: #34d399;
+      user-select: all;
+    }
+    .output-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .viva-box {
+      background: rgba(99, 102, 241, 0.08);
+      border-left: 4px solid #6366f1;
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+    }
+    .viva-q {
+      font-weight: 700;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+    .viva-a {
+      color: #f1f5f9;
+    }
+    .print-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      z-index: 1000;
+    }
+    @media print {
+      .quick-nav, .print-btn { display: none; }
+      body { background: white; color: black; }
+      .task-card { border: 1px solid #ccc; background: white; color: black; page-break-inside: avoid; }
+      .speech-box, .viva-box, .cmd-box, .output-box { background: #f8f9fa; color: black; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+
+  <div class="guide-container">
+
+    <!-- Top Header -->
+    <header class="hero-header">
+      <h1 class="hero-title">💉 Teacher Demonstration & Viva Voce Guide</h1>
+      <p style="color: #94a3b8; margin-bottom: 16px;">
+        Step-by-step practical presentation script for all 15 tasks of the Selenium Testing Pipeline for Vaccination Reminder Portal (VaxGuard).
+      </p>
+      <div class="hero-meta">
+        <span>👩‍🎓 Gayatri Patil</span>
+        <span>🆔 PRN: 23102A0016</span>
+        <span>🔢 Roll No: 15</span>
+        <span>🚀 Version: v1.0.0</span>
+        <span>🏛️ DevOps Lab</span>
+      </div>
+    </header>
+
+    <!-- Quick Navigation Bar -->
+    <nav class="quick-nav">
+      <a href="#prep" class="nav-btn" style="background:#0ea5e9; color:white;">⚙️ Setup</a>
+      <a href="#t1" class="nav-btn">T1: Scope</a>
+      <a href="#t2" class="nav-btn">T2: Agile</a>
+      <a href="#t3" class="nav-btn">T3: Arch</a>
+      <a href="#t4" class="nav-btn">T4: Git</a>
+      <a href="#t5" class="nav-btn">T5: Feature 1</a>
+      <a href="#t6" class="nav-btn">T6: Conflict</a>
+      <a href="#t7" class="nav-btn">T7: Jenkins</a>
+      <a href="#t8" class="nav-btn">T8: Pipeline</a>
+      <a href="#t9" class="nav-btn">T9: Selenium</a>
+      <a href="#t10" class="nav-btn">T10: Defect Gate</a>
+      <a href="#t11" class="nav-btn">T11: Docker</a>
+      <a href="#t12" class="nav-btn">T12: CD</a>
+      <a href="#t13" class="nav-btn">T13: Ansible</a>
+      <a href="#t14" class="nav-btn">T14: Rollback</a>
+      <a href="#t15" class="nav-btn">T15: Viva</a>
+    </nav>
+
+    <!-- PREPARATION -->
+    <section id="prep" class="task-card" style="border-color: #0ea5e9;">
+      <span class="task-badge">BEFORE CALLING TEACHER</span>
+      <h2 class="task-title">⚡ 30-Second Setup: Start Portal Locally</h2>
+      <p style="font-size:14px; margin-bottom:12px;">Run this in PowerShell inside <code>c:\Users\ishwar\Desktop\devops gayatri</code>:</p>
+      <div class="cmd-box">java -jar target\vaccination-reminder-portal-1.0.0.jar</div>
+      <p style="font-size:13px; color:#94a3b8; margin-top:8px;">
+        Open your browser to <a href="http://localhost:8080" target="_blank" style="color:#38bdf8;">http://localhost:8080</a>. Keep that tab open so you can switch to it instantly!
+      </p>
+    </section>
+
+    <!-- TASK 01 -->
+    <section id="t1" class="task-card">
+      <span class="task-badge">Task 01</span>
+      <h2 class="task-title">Problem Definition and Scope</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "Respected Madam/Sir, in Task 1, I addressed the real-world healthcare challenge of child vaccination dropouts. Because physical paper cards are easily misplaced, parents miss critical booster timelines. I identified our three key stakeholders—Parents, Healthcare Nurses, and Public Health Officers—and defined our frozen 15-task MVP scope for VaxGuard."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>docs/TASK-01-Problem-Definition-and-Scope.md</code>. Point to the Stakeholder Analysis Table and the 15-Task Scope Table.</div>
+      </div>
+      <div class="viva-box">
+        <div class="viva-q">Teacher: "Why is a Vaccination Portal suitable for DevOps?"</div>
+        <div class="viva-a">Your Answer: "Healthcare software directly affects infant wellness; defects cannot be tolerated in production. DevOps automates regression testing and quality gates so that no broken update is ever deployed."</div>
+      </div>
+    </section>
+
+    <!-- TASK 02 -->
+    <section id="t2" class="task-card">
+      <span class="task-badge">Task 02</span>
+      <h2 class="task-title">Agile Planning and DevOps Workflow</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 2, I organized our project using Agile methodology. I wrote user stories with strict acceptance criteria, created a product backlog, defined a rigorous Definition of Done (DoD), and mapped our complete DevOps lifecycle from Git to Jenkins, Docker, and Ansible."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>docs/TASK-02-Agile-Planning-and-DevOps-Workflow.md</code>. Point to the Mermaid DevOps Lifecycle Diagram and the Definition of Done.</div>
+      </div>
+      <div class="viva-box">
+        <div class="viva-q">Teacher: "What is your Definition of Done (DoD)?"</div>
+        <div class="viva-a">Your Answer: "A story is only Done when code passes peer review, completes 100% of headless Selenium tests in Jenkins, passes Docker packaging, and validates the /api/health probe."</div>
+      </div>
+    </section>
+
+    <!-- TASK 03 -->
+    <section id="t3" class="task-card">
+      <span class="task-badge">Task 03</span>
+      <h2 class="task-title">Requirements, Architecture and Technology Setup</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 3, I designed the multi-tier architecture using Java 21 LTS, Spring Boot 3.3.4, and Maven. I configured an in-memory H2 database for zero-friction portability so anyone can run the pipeline without installing external database servers, and exposed Actuator health checks for DevOps."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">💻 What Command to Run:</div>
+        <div class="cmd-box">Invoke-RestMethod -Uri "http://localhost:8080/api/health" -Method Get</div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎯 What Output to Point To:</div>
+        <div class="output-box">Show JSON with: <code>status: UP</code>, <code>database: H2 In-Memory (Connected)</code>, <code>author: Gayatri Patil (PRN: 23102A0016)</code>.</div>
+      </div>
+    </section>
+
+    <!-- TASK 04 -->
+    <section id="t4" class="task-card">
+      <span class="task-badge">Task 04</span>
+      <h2 class="task-title">Git Repository Initialization & Branch Policy</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 4, I initialized our Git repository following GitFlow branching rules. I configured .gitignore to exclude build binaries, added GitHub issue templates for bug reports and feature requests, and set up a pull request template with review checklists."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">💻 What Command to Run:</div>
+        <div class="cmd-box">git status; git branch -a</div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎯 What Output to Point To:</div>
+        <div class="output-box">Show clean working tree on branch <code>main</code>, with branch <code>develop</code> present.</div>
+      </div>
+    </section>
+
+    <!-- TASK 05 -->
+    <section id="t5" class="task-card">
+      <span class="task-badge">Task 05</span>
+      <h2 class="task-title">Feature Development with Branching (Schedule Engine)</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 5, I implemented our first core workflow on branch <code>feature/vaccination-records</code>: the national immunization schedule generator. When an infant is registered with DOB, it calculates birth doses (BCG, OPV-0, HepB-0), 6-week, 10-week, 14-week, 9-month, and booster dates. I merged it into <code>develop</code> via Pull Request #1."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">💻 What Command to Run:</div>
+        <div class="cmd-box">git log --oneline --grep="feature/vaccination-records" -n 2</div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎯 What Output to Point To:</div>
+        <div class="output-box">Show commit <code>8f1233f Merge pull request #1 from feature/vaccination-records into develop</code>.</div>
+      </div>
+    </section>
+
+    <!-- TASK 06 -->
+    <section id="t6" class="task-card">
+      <span class="task-badge">Task 06</span>
+      <h2 class="task-title">MVP Completion, Merge Conflict & Release Tag v1.0.0</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 6, I finished the MVP on branch <code>feature/status-workflow-dashboard</code>. I demonstrated collaborative conflict resolution by simulating a merge conflict in application properties and resolving it manually. Then I merged develop into main and tagged our release as <code>v1.0.0</code>."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">💻 What Command to Run:</div>
+        <div class="cmd-box">git log --oneline --graph --all -n 6; git tag -n</div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎯 What Output to Point To:</div>
+        <div class="output-box">Point to the Git merge tree graph and release tag <code>v1.0.0 Release v1.0.0: Functional MVP</code>.</div>
+      </div>
+    </section>
+
+    <!-- TASK 07 -->
+    <section id="t7" class="task-card">
+      <span class="task-badge">Task 07</span>
+      <h2 class="task-title">Jenkins Installation and CI Build Job</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 7, I set up Jenkins Continuous Integration. I configured a Maven build job that triggers on Git commit or scheduled polling (H/15 * * * *). Jenkins runs a clean build, executes automated tests, and archives the packaged JAR artifact."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>jenkins/job-config.xml</code>. Point to lines with SCM polling and artifact archiving.</div>
+      </div>
+    </section>
+
+    <!-- TASK 08 -->
+    <section id="t8" class="task-card">
+      <span class="task-badge">Task 08</span>
+      <h2 class="task-title">Pipeline as Code (Jenkinsfile)</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 8, I codified our deployment pipeline into a declarative <code>Jenkinsfile</code>. It features 8 stages: Checkout, Tool Verification, Compile, Selenium Quality Gate, Package Artifact, Docker Build, Continuous Deployment, and Automated Health Check."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open file <code>Jenkinsfile</code>. Show the environment parameters (<code>ENVIRONMENT</code>, <code>APP_PORT</code>, <code>RUN_SELENIUM_TESTS</code>).</div>
+      </div>
+      <div class="viva-box">
+        <div class="viva-q">Teacher: "Why is Jenkinsfile stored in Git?"</div>
+        <div class="viva-a">Your Answer: "Pipeline as Code allows our CI/CD workflow to be versioned, branched, and reviewed just like regular application code."</div>
+      </div>
+    </section>
+
+    <!-- TASK 09 -->
+    <section id="t9" class="task-card">
+      <span class="task-badge">Task 09</span>
+      <h2 class="task-title">Selenium Test Design & Local Execution (5 Journeys)</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 9, I designed automated browser tests using Selenium WebDriver 4 and JUnit 5 covering 5 critical user journeys. The tests run in headless mode for CI/CD compatibility, and I developed a custom JUnit extension that captures visual PNG screenshots whenever a test fails."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">💻 What Command to Run:</div>
+        <div class="cmd-box">.\mvnw.cmd test-compile</div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎯 What Output to Point To:</div>
+        <div class="output-box">Open <code>src/test/java/com/vaxguard/selenium/</code>. Point to the 5 Journey tests and <code>ScreenshotOnFailureExtension.java</code>.</div>
+      </div>
+    </section>
+
+    <!-- TASK 10 -->
+    <section id="t10" class="task-card">
+      <span class="task-badge">Task 10</span>
+      <h2 class="task-title">Continuous Testing Quality Gate & Defect Remediation</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 10, I demonstrated our automated Quality Gate. I introduced an intentional validation defect in child registration. When Jenkins ran the Selenium tests, it caught the defect, captured a failure screenshot into target/screenshots, and halted deployment immediately. After committing the fix, the rerun passed cleanly."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">
+          Go to <a href="http://localhost:8080" target="_blank" style="color:#38bdf8;">http://localhost:8080</a> ➔ Click <strong>"DevOps Pipeline & Quality Gate"</strong> tab ➔ Show the <strong>Task 10 Defect Simulation Toggle</strong>!
+        </div>
+      </div>
+    </section>
+
+    <!-- TASK 11 -->
+    <section id="t11" class="task-card">
+      <span class="task-badge">Task 11</span>
+      <h2 class="task-title">Docker Image & Container Lifecycle</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 11, I containerized the portal with a multi-stage Dockerfile. Stage 1 compiles with JDK 21 and Maven; Stage 2 copies only the fat JAR into Alpine JRE 21. For security, the container runs under a non-root user 'vaxuser' with an automated health check."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>docker/Dockerfile</code> and <code>docker/container-lifecycle.ps1</code>. Point to <code>USER vaxuser</code> and <code>HEALTHCHECK</code>.</div>
+      </div>
+      <div class="viva-box">
+        <div class="viva-q">Teacher: "Why use a multi-stage Dockerfile?"</div>
+        <div class="viva-a">Your Answer: "It prevents build tools and source code from entering the production container, reducing image size from 800MB down to 214MB and eliminating security vulnerabilities."</div>
+      </div>
+    </section>
+
+    <!-- TASK 12 -->
+    <section id="t12" class="task-card">
+      <span class="task-badge">Task 12</span>
+      <h2 class="task-title">Jenkins-Docker Continuous Deployment</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 12, I extended Jenkins to build the Docker image, tag it with version 1.0.0, and deploy a fresh container with port mapping 8080:8080. The pipeline verifies container readiness via /api/health before completing."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>docker/docker-compose.yml</code> and <code>docs/TASK-12-Jenkins-Docker-Continuous-Deployment.md</code>.</div>
+      </div>
+    </section>
+
+    <!-- TASK 13 -->
+    <section id="t13" class="task-card">
+      <span class="task-badge">Task 13</span>
+      <h2 class="task-title">Configuration Management Script (Ansible)</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 13, I automated server provisioning using Ansible. My playbook installs OpenJDK 21, Docker, and firewall rules; provisions dedicated user 'vaxadmin'; sets up directory trees in /opt/vaccination-portal; and configures the systemd service."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>ansible/playbook.yml</code> and <code>ansible/inventory.ini</code>. Show the 12 structured automation tasks.</div>
+      </div>
+    </section>
+
+    <!-- TASK 14 -->
+    <section id="t14" class="task-card">
+      <span class="task-badge">Task 14</span>
+      <h2 class="task-title">Automated Provisioning, Idempotency & Rollback</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 14, I validated Idempotency and Automated Rollback. Idempotency guarantees that re-running the Ansible playbook yields 'changed=0' with zero unintended side effects. And if a deployment ever fails, our rollback.yml script atomically recovers release v1.0.0 within 8 seconds."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">📂 What to Show on Screen:</div>
+        <div class="output-box">Open <code>docs/TASK-14-Automated-Provisioning-and-Reliability.md</code>. Point to the Ansible recap: <code>ok=14 changed=0 failed=0</code>.</div>
+      </div>
+      <div class="viva-box">
+        <div class="viva-q">Teacher: "What is Idempotency?"</div>
+        <div class="viva-a">Your Answer: "Idempotency means running the automation script multiple times produces the exact same system state without making redundant changes or corrupting configurations."</div>
+      </div>
+    </section>
+
+    <!-- TASK 15 -->
+    <section id="t15" class="task-card" style="border-color:#10b981;">
+      <span class="task-badge" style="background:#10b981;">Task 15</span>
+      <h2 class="task-title">Final End-to-End Release & 2-Minute Live Demo</h2>
+      <div class="section-block">
+        <div class="section-label">🗣️ What to Say to the Teacher:</div>
+        <div class="speech-box">
+          "In Task 15, I brought the entire pipeline together into a release-ready baseline. All 15 tasks have complete documentation dossiers in the docs/ folder. Now I would like to show you a live 2-minute demonstration of VaxGuard."
+        </div>
+      </div>
+      <div class="section-block">
+        <div class="section-label">🎬 2-Minute Live Demo Actions:</div>
+        <div class="output-box" style="line-height: 1.8;">
+          1. <strong>Show Dashboard:</strong> Open <a href="http://localhost:8080" target="_blank" style="color:#38bdf8;">http://localhost:8080</a>. Point to the real-time KPI counters (Registered Children, Completed Doses, Compliance Rate %) and the Chart.js doughnut chart.<br>
+          2. <strong>Register a Child:</strong> Click <code>[➕ Register Beneficiary]</code>. Enter child name <em>"Ananya Patil"</em>, DOB <em>6 weeks ago</em>, and parent details. Click Save.<br>
+          3. <strong>Show Schedule:</strong> Go to <strong>Vaccination Records</strong> tab. Show how all 16 doses (BCG, OPV, Pentavalent) were calculated automatically!<br>
+          4. <strong>Clinical Administration:</strong> Click <code>[💉 Administer]</code> on an upcoming dose. Enter nurse name and lot number. Confirm ➔ badge turns green <strong>COMPLETED</strong>!<br>
+          5. <strong>Simulate Reminders:</strong> Click <code>[Dispatch Due Reminders]</code> ➔ show the automated SMS broadcast popup!
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
