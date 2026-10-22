@@ -1,7 +1,7 @@
 # TASK 07: Jenkins Installation and Continuous Integration Job
 
 **Student:** Gayatri Patil  
-**PRN / Roll No:** 23102A0016 / Roll 15  
+**PRN / Roll No:** 23102A0016 / Roll 16  
 **Project:** Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)  
 **Deliverable:** Configured Jenkins job configuration, successful build log, trigger evidence, and archived build artifact.
 

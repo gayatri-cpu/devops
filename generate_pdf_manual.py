@@ -1,6 +1,6 @@
 """
 Script to generate high-resolution, print-ready HTML and compile to PDF via Edge Headless
-Candidate: Gayatri Patil (PRN: 23102A0016, Roll: 15)
+Candidate: Gayatri Patil (PRN: 23102A0016, Roll: 16)
 """
 import os
 import glob
@@ -450,7 +450,7 @@ def build_complete_html():
     <div class="cert-container">
         <div class="cert-heading">Certificate of Completion</div>
         <p class="cert-body">
-            This is to certify that Miss <strong>GAYATRI PATIL</strong>, bearing Student ID / PRN <strong>23102A0016</strong> and Roll Number <strong>15</strong>, 
+            This is to certify that Miss <strong>GAYATRI PATIL</strong>, bearing Student ID / PRN <strong>23102A0016</strong> and Roll Number <strong>16</strong>, 
             of Third Year Computer Engineering, has satisfactorily completed all fifteen (15) prescribed laboratory assignments and deliverables for the course of 
             <strong>DevOps Laboratory</strong> entitled <em>'Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)'</em> during the academic year 2026&ndash;2027.
         </p>

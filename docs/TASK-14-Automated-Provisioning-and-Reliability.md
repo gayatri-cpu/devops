@@ -1,7 +1,7 @@
 # TASK 14: Automated Provisioning and Reliability Validation
 
 **Student:** Gayatri Patil  
-**PRN / Roll No:** 23102A0016 / Roll 15  
+**PRN / Roll No:** 23102A0016 / Roll 16  
 **Project:** Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)  
 **Deliverable:** Provisioned target node, Ansible idempotency evidence, health-check result, and rollback demonstration.
 
@@ -100,7 +100,7 @@ Probing Health Endpoint: http://localhost:8080/api/health
   "status": "UP",
   "service": "Vaccination Reminder Portal (VaxGuard)",
   "version": "1.0.0",
-  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 15)",
+  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 16)",
   "timestamp": "2026-10-22T14:26:45.890",
   "startupTime": "2026-10-22T14:26:38.102",
   "database": "H2 In-Memory (Connected)",

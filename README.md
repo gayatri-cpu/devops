@@ -13,7 +13,7 @@
 ## 🎓 Academic Project Profile
 - **Candidate Name:** Gayatri Patil
 - **Student ID / PRN:** `23102A0016`
-- **Roll Number:** `15`
+- **Roll Number:** `16`
 - **Project Title:** Selenium Testing Pipeline for a Vaccination Reminder Portal
 - **Release Version:** `v1.0.0` (Production Baseline)
 
@@ -166,5 +166,5 @@ The testing suite in `src/test/java/com/vaxguard/selenium/` validates 5 critical
 ## 👩‍💻 Author & Academic Attribution
 - **Student:** Gayatri Patil
 - **PRN:** `23102A0016`
-- **Roll Number:** `15`
+- **Roll Number:** `16`
 - **Class / Department:** Computer Engineering / DevOps Lab

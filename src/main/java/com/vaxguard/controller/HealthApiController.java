@@ -21,7 +21,7 @@ public class HealthApiController {
         health.put("status", "UP");
         health.put("service", "Vaccination Reminder Portal (VaxGuard)");
         health.put("version", "1.0.0");
-        health.put("author", "Gayatri Patil (PRN: 23102A0016, Roll: 15)");
+        health.put("author", "Gayatri Patil (PRN: 23102A0016, Roll: 16)");
         health.put("timestamp", LocalDateTime.now().toString());
         health.put("startupTime", startupTime.toString());
         health.put("database", "H2 In-Memory (Connected)");

@@ -3,7 +3,7 @@
 
 **Student Name:** Gayatri Patil  
 **PRN / Student ID:** 23102A0016  
-**Roll Number:** 15  
+**Roll Number:** 16  
 **Class / Semester:** TE Computer Engineering / DevOps Lab  
 **Project Title:** Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)  
 
@@ -59,7 +59,7 @@ Point to the verified status:
   "status": "UP",
   "service": "Vaccination Reminder Portal (VaxGuard)",
   "version": "1.0.0",
-  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 15)",
+  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 16)",
   "database": "H2 In-Memory (Connected)",
   "qualityGate": "PASSED"
 }

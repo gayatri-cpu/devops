@@ -1,7 +1,7 @@
 # TASK 08: Pipeline as Code and Server Deployment
 
 **Student:** Gayatri Patil  
-**PRN / Roll No:** 23102A0016 / Roll 15  
+**PRN / Roll No:** 23102A0016 / Roll 16  
 **Project:** Selenium Testing Pipeline for a Vaccination Reminder Portal (VaxGuard)  
 **Deliverable:** Jenkinsfile, successful declarative pipeline execution run, deployed application URL, and configuration evidence.
 
@@ -121,7 +121,7 @@ Probing health check endpoint...
   "status": "UP",
   "service": "Vaccination Reminder Portal (VaxGuard)",
   "version": "1.0.0",
-  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 15)",
+  "author": "Gayatri Patil (PRN: 23102A0016, Roll: 16)",
   "database": "H2 In-Memory (Connected)",
   "qualityGate": "PASSED"
 }

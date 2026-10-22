@@ -1,6 +1,6 @@
 # ==============================================================================
 # Multi-Stage Dockerfile for Vaccination Reminder Portal (VaxGuard)
-# Project Author: Gayatri Patil (23102A0016, Roll 15)
+# Project Author: Gayatri Patil (23102A0016, Roll 16)
 # ==============================================================================
 
 # STAGE 1: Build & Package with Maven and Eclipse Temurin JDK 21

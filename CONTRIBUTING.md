@@ -1,7 +1,7 @@
 # Contributing & Branch Policy Guide
 
 ## Project: Vaccination Reminder Portal (VaxGuard)
-**Author:** Gayatri Patil (PRN: 23102A0016, Roll: 15)
+**Author:** Gayatri Patil (PRN: 23102A0016, Roll: 16)
 
 ---
 
