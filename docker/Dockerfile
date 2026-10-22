@@ -5,23 +5,17 @@
 
 # STAGE 1: Build & Package with Maven and Eclipse Temurin JDK 21
 FROM eclipse-temurin:21-jdk-alpine AS builder
-
 WORKDIR /build
 
-# Copy Maven Wrapper and POM first to leverage Docker layer caching
 COPY pom.xml .
-COPY mvnw .
-COPY mvnw.cmd .
-COPY .mvn .mvn
 
-# Download dependencies offline
-RUN chmod +x ./mvnw || true
+RUN apk add --no-cache maven
 
 # Copy full application source code
 COPY src ./src
 
 # Compile and package application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # STAGE 2: Lightweight, Production-Ready Runtime Image
 FROM eclipse-temurin:21-jre-alpine

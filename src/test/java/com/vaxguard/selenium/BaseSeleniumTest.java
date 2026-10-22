@@ -1,5 +1,6 @@
 package com.vaxguard.selenium;
 
+import com.vaxguard.VaxGuardApplication;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import java.io.File;
 import java.time.Duration;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = VaxGuardApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(ScreenshotOnFailureExtension.class)
 public abstract class BaseSeleniumTest {
 
@@ -48,21 +49,24 @@ public abstract class BaseSeleniumTest {
                 if (headless) {
                     options.addArguments("--headless=new");
                 }
-                options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080", "--remote-allow-origins=*");
+                options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu",
+                        "--window-size=1920,1080", "--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
             } else {
                 EdgeOptions options = new EdgeOptions();
                 if (headless) {
                     options.addArguments("--headless=new");
                 }
-                options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1920,1080", "--remote-allow-origins=*");
+                options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu",
+                        "--window-size=1920,1080", "--remote-allow-origins=*");
                 driver = new EdgeDriver(options);
             }
         } catch (Throwable t) {
             System.err.println("[SELENIUM WARN] Browser driver initialization failed or offline: " + t.getMessage());
         }
 
-        org.junit.jupiter.api.Assumptions.assumeTrue(driver != null, "Selenium browser driver is not available in the current environment; skipping browser test.");
+        org.junit.jupiter.api.Assumptions.assumeTrue(driver != null,
+                "Selenium browser driver is not available in the current environment; skipping browser test.");
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -70,10 +74,10 @@ public abstract class BaseSeleniumTest {
 
     private boolean isChromeAvailable() {
         String[] chromePaths = {
-            "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-            "/usr/bin/google-chrome",
-            "/usr/bin/chromium-browser"
+                "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+                "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+                "/usr/bin/google-chrome",
+                "/usr/bin/chromium-browser"
         };
         for (String p : chromePaths) {
             if (new File(p).exists()) {
