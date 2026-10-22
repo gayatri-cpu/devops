@@ -1,0 +1,24 @@
+[Unit]
+Description=Vaccination Reminder Portal (VaxGuard)
+After=network.target
+
+[Service]
+Type=simple
+User={{ app_user }}
+Group={{ app_group }}
+WorkingDirectory={{ app_dir }}
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar {{ app_dir }}/app.jar
+SuccessExitStatus=143
+TimeoutStopSec=15
+Restart=on-failure
+RestartSec=5
+
+Environment=PORT={{ app_port }}
+Environment=SPRING_PROFILES_ACTIVE=prod
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vaxguard
+
+[Install]
+WantedBy=multi-user.target
