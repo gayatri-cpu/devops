@@ -1,0 +1,57 @@
+---
+# ==============================================================================
+# Ansible Playbook: Automated Rollback & Recovery Demonstration
+# Project: Vaccination Reminder Portal (Gayatri Patil - 23102A0016)
+# ==============================================================================
+- name: Automated Rollback to Previous Stable Release
+  hosts: vax_servers
+  become: true
+
+  vars:
+    app_dir: "/opt/vaccination-portal"
+    previous_stable_version: "1.0.0"
+    app_port: 8080
+
+  tasks:
+    - name: 1. Verify Previous Stable Release Artifact Exists
+      stat:
+        path: "{{ app_dir }}/releases/vaccination-reminder-portal-{{ previous_stable_version }}.jar"
+      register: prev_artifact
+      failed_when: not prev_artifact.stat.exists
+
+    - name: 2. Re-point Symlink to Previous Stable Artifact
+      file:
+        src: "{{ app_dir }}/releases/vaccination-reminder-portal-{{ previous_stable_version }}.jar"
+        dest: "{{ app_dir }}/app.jar"
+        state: link
+      notify: Restart VaxGuard Service
+
+    - name: 3. Restart Application Service with Previous Version
+      systemd:
+        name: vaxguard
+        state: restarted
+
+    - name: 4. Perform Health Check on Restored Release
+      uri:
+        url: "http://localhost:{{ app_port }}/api/health"
+        method: GET
+        status_code: 200
+        return_content: yes
+      register: rollback_health
+      retries: 5
+      delay: 4
+      until: rollback_health.status == 200
+
+    - name: 5. Display Rollback Success Report
+      debug:
+        msg: >
+          [ROLLBACK SUCCESSFUL] Application safely recovered!
+          Current Active Version: {{ rollback_health.json.version }}
+          Health Status: {{ rollback_health.json.status }}
+          Database: {{ rollback_health.json.database }}
+
+  handlers:
+    - name: Restart VaxGuard Service
+      systemd:
+        name: vaxguard
+        state: restarted

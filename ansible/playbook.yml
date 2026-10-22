@@ -1,0 +1,139 @@
+---
+# ==============================================================================
+# Ansible Playbook: Automated Provisioning and Deployment
+# Project: Vaccination Reminder Portal (Gayatri Patil - 23102A0016)
+# ==============================================================================
+- name: Provision and Deploy Vaccination Reminder Portal
+  hosts: vax_servers
+  become: true
+
+  vars:
+    app_version: "1.0.0"
+    app_port: 8080
+    app_user: "vaxadmin"
+    app_group: "vaxadmin"
+    app_dir: "/opt/vaccination-portal"
+    java_package: "openjdk-21-jre-headless"
+
+  tasks:
+    - name: 1. Update APT package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: 2. Install Server Prerequisites and Dependencies
+      apt:
+        name:
+          - "{{ java_package }}"
+          - docker.io
+          - docker-compose
+          - curl
+          - wget
+          - git
+          - ufw
+        state: present
+
+    - name: 3. Ensure Docker Service is Enabled and Running
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: 4. Create Dedicated Application System User and Group
+      group:
+        name: "{{ app_group }}"
+        state: present
+
+    - name: 4b. Create user and add to docker group
+      user:
+        name: "{{ app_user }}"
+        group: "{{ app_group }}"
+        groups: docker
+        append: yes
+        shell: /bin/bash
+        home: "{{ app_dir }}"
+        create_home: no
+        system: yes
+
+    - name: 5. Create Application Directory Hierarchy
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ app_user }}"
+        group: "{{ app_group }}"
+        mode: '0755'
+      loop:
+        - "{{ app_dir }}"
+        - "{{ app_dir }}/releases"
+        - "{{ app_dir }}/logs"
+        - "{{ app_dir }}/config"
+
+    - name: 6. Configure UFW Firewall Rules for Ports 8080 and 22
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - "22"
+        - "{{ app_port | string }}"
+
+    - name: 7. Deploy Application Executable JAR
+      copy:
+        src: "../target/vaccination-reminder-portal-{{ app_version }}.jar"
+        dest: "{{ app_dir }}/releases/vaccination-reminder-portal-{{ app_version }}.jar"
+        owner: "{{ app_user }}"
+        group: "{{ app_group }}"
+        mode: '0755'
+      notify: Restart VaxGuard Service
+
+    - name: 8. Create Symlink to Current Active Release
+      file:
+        src: "{{ app_dir }}/releases/vaccination-reminder-portal-{{ app_version }}.jar"
+        dest: "{{ app_dir }}/app.jar"
+        state: link
+        owner: "{{ app_user }}"
+        group: "{{ app_group }}"
+
+    - name: 9. Template Systemd Service Configuration
+      template:
+        src: templates/vaxguard.service.j2
+        dest: /etc/systemd/system/vaxguard.service
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Reload Systemd
+
+    - name: 10. Ensure VaxGuard Service is Started and Enabled
+      systemd:
+        name: vaxguard
+        state: started
+        enabled: yes
+
+    - name: 11. Automated Health Check Verification
+      uri:
+        url: "http://localhost:{{ app_port }}/api/health"
+        method: GET
+        status_code: 200
+        return_content: yes
+      register: health_result
+      retries: 6
+      delay: 5
+      until: health_result.status == 200
+
+    - name: 12. Output Provisioning and Health Check Summary
+      debug:
+        msg: >
+          [PROVISIONING COMPLETE] VaxGuard Portal deployed successfully!
+          Service Status: {{ health_result.json.status }}
+          Active Release: {{ app_version }}
+          Author: Gayatri Patil (23102A0016)
+
+  handlers:
+    - name: Reload Systemd
+      systemd:
+        daemon_reload: yes
+
+    - name: Restart VaxGuard Service
+      systemd:
+        name: vaxguard
+        state: restarted
