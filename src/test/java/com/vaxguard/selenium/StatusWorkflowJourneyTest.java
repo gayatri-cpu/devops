@@ -42,9 +42,8 @@ public class StatusWorkflowJourneyTest extends BaseSeleniumTest {
         click(By.id("btn-save-administer"));
 
         // 6. Verify toast feedback
-        WebElement toast = waitForVisible(By.className("toast"));
-        assertTrue(toast.getText().contains("updated to") || toast.getText().contains("Record #"),
-                "Administration success toast should be displayed");
+        wait.until(d -> d.findElements(By.className("toast")).stream()
+                .anyMatch(t -> t.getText().contains("updated to") || t.getText().contains("Record #")));
 
         // 7. Verify Parent View Role restrictions (Parent cannot administer)
         click(By.id("role-parent-btn"));

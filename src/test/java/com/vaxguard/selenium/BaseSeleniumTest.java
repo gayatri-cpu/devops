@@ -53,6 +53,10 @@ public abstract class BaseSeleniumTest {
                         "--window-size=1920,1080", "--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
             } else {
+                File localDriver = new File(".tools/edgedriver/msedgedriver.exe");
+                if (localDriver.exists()) {
+                    System.setProperty("webdriver.edge.driver", localDriver.getAbsolutePath());
+                }
                 EdgeOptions options = new EdgeOptions();
                 if (headless) {
                     options.addArguments("--headless=new");
@@ -111,8 +115,17 @@ public abstract class BaseSeleniumTest {
 
     protected void type(By locator, String text) {
         WebElement el = waitForVisible(locator);
-        el.clear();
-        el.sendKeys(text);
+        String typeAttr = el.getAttribute("type");
+        if ("date".equalsIgnoreCase(typeAttr)) {
+            ((org.openqa.selenium.JavascriptExecutor) driver).executeScript(
+                    "arguments[0].value = arguments[1];" +
+                    "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+                    "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
+                    el, text);
+        } else {
+            el.clear();
+            el.sendKeys(text);
+        }
     }
 
     protected String getText(By locator) {

@@ -21,7 +21,11 @@ public class ScreenshotOnFailureExtension implements TestWatcher {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        Object testInstance = context.getRequiredTestInstance();
+        Optional<Object> testInstanceOpt = context.getTestInstance();
+        if (testInstanceOpt.isEmpty()) {
+            return;
+        }
+        Object testInstance = testInstanceOpt.get();
         if (testInstance instanceof BaseSeleniumTest) {
             WebDriver driver = ((BaseSeleniumTest) testInstance).getDriver();
             if (driver != null && driver instanceof TakesScreenshot) {

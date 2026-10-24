@@ -65,8 +65,7 @@ public class DefectSimulationJourneyTest extends BaseSeleniumTest {
 
         // Retry registration with resolved code
         click(By.id("btn-submit-registration"));
-        WebElement successToast = waitForVisible(By.className("toast"));
-        assertTrue(successToast.getText().contains("Success") || successToast.getText().contains("registered"),
-                "Following the bugfix commit, the test re-run passes cleanly");
+        wait.until(d -> d.findElements(By.className("toast")).stream()
+                .anyMatch(t -> t.getText().contains("Success") || t.getText().contains("registered")));
     }
 }

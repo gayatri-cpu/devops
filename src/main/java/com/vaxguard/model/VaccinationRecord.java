@@ -1,6 +1,7 @@
 package com.vaxguard.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -147,5 +148,25 @@ public class VaccinationRecord {
 
     public void setReminderSentAt(LocalDateTime reminderSentAt) {
         this.reminderSentAt = reminderSentAt;
+    }
+
+    @JsonProperty("childName")
+    public String getChildName() {
+        return beneficiary != null ? beneficiary.getChildName() : "Unknown";
+    }
+
+    @JsonProperty("parentName")
+    public String getParentName() {
+        return beneficiary != null ? beneficiary.getParentName() : "N/A";
+    }
+
+    @JsonProperty("contactPhone")
+    public String getContactPhone() {
+        return beneficiary != null ? beneficiary.getContactPhone() : "N/A";
+    }
+
+    @JsonProperty("dateOfBirth")
+    public LocalDate getDateOfBirth() {
+        return beneficiary != null ? beneficiary.getDateOfBirth() : null;
     }
 }

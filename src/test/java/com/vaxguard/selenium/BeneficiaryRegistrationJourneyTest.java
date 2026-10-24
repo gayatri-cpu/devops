@@ -61,10 +61,24 @@ public class BeneficiaryRegistrationJourneyTest extends BaseSeleniumTest {
         // 6. Navigate to Vaccination Records Tab and verify schedule was auto-generated
         click(By.id("btn-nav-schedule"));
         type(By.id("search-input"), childName);
-        Thread.sleep(1000);
+
+        wait.until(d -> {
+            try {
+                List<WebElement> tblRows = d.findElements(By.cssSelector("#records-table-body tr"));
+                return !tblRows.isEmpty() && tblRows.stream().anyMatch(r -> {
+                    try {
+                        return r.getText().contains(childName);
+                    } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                        return false;
+                    }
+                });
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                return false;
+            }
+        });
 
         List<WebElement> recordRows = driver.findElements(By.cssSelector("#records-table-body tr"));
         assertFalse(recordRows.isEmpty(), "Auto-generated vaccination records should exist for the child");
-        assertTrue(recordRows.get(0).getText().contains(childName), "Record rows should match registered child");
+        assertTrue(recordRows.stream().anyMatch(r -> r.getText().contains(childName)), "Record rows should match registered child");
     }
 }

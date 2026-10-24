@@ -207,12 +207,12 @@ function renderRecordsTable(records) {
             <tr id="row-record-${r.id}">
                 <td style="font-family:var(--font-mono); color:var(--text-dim);">#${r.id}</td>
                 <td>
-                    <div style="font-weight:700; color:#ffffff;">${r.beneficiary ? r.beneficiary.childName : 'Unknown'}</div>
-                    <div style="font-size:11px; color:var(--text-dim);">DOB: ${r.beneficiary ? r.beneficiary.dateOfBirth : 'N/A'}</div>
+                    <div style="font-weight:700; color:#ffffff;">${(r.beneficiary && r.beneficiary.childName) || r.childName || 'Unknown'}</div>
+                    <div style="font-size:11px; color:var(--text-dim);">DOB: ${(r.beneficiary && r.beneficiary.dateOfBirth) || r.dateOfBirth || 'N/A'}</div>
                 </td>
                 <td>
-                    <div>${r.beneficiary ? r.beneficiary.parentName : 'N/A'}</div>
-                    <div style="font-size:11px; font-family:var(--font-mono); color:var(--text-muted);">${r.beneficiary ? r.beneficiary.contactPhone : 'N/A'}</div>
+                    <div>${(r.beneficiary && r.beneficiary.parentName) || r.parentName || 'N/A'}</div>
+                    <div style="font-size:11px; font-family:var(--font-mono); color:var(--text-muted);">${(r.beneficiary && r.beneficiary.contactPhone) || r.contactPhone || 'N/A'}</div>
                 </td>
                 <td>
                     <div style="font-weight:600; color:#e2e8f0;">${r.vaccineName}</div>
